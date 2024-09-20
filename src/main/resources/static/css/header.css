@@ -1,0 +1,32 @@
+/* styles.css */
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-size: 16px; /* Default font size */
+    transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+}
+
+header {
+    background: #f0f0f0;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+
+}
+header > * {
+    margin-left: 15px; /* Adds space between items, but not before the first item */
+}
+
+/* Remove margin from the first item to avoid extra space on the left */
+header > :first-child {
+    margin-left: 0;
+}
+
+button {
+    padding: 5px 10px;
+}
+
+

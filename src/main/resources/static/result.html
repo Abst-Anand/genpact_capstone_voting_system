@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submission Result</title>
+</head>
+<body>
+
+<h2>Submission Result</h2>
+
+<div>
+  <h3>Profile Picture:</h3>
+  <img src="${filePath}" alt="Profile Picture" style="width: 150px; height: 150px;"/>
+</div>
+
+<div>
+  <h3>Message:</h3>
+  <p th:text="${message}"></p>
+  <p th:text="${error}"></p>
+</div>
+
+<a href="/form.html">Go Back to Form</a>
+
+</body>
+</html>
