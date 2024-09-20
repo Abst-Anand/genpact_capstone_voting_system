@@ -1,8 +1,6 @@
-package com.votingSystem.entities;
+package com.votingSystem.entity;
 
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
 
 public class FormDataEntity {
     private String name;

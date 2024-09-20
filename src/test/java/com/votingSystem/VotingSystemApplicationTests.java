@@ -1,7 +1,7 @@
 package com.votingSystem;
 
-import com.votingSystem.entities.ProductEntity;
-import com.votingSystem.repositories.ProductRepository;
+import com.votingSystem.entity.ProductEntity;
+import com.votingSystem.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

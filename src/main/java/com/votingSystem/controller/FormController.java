@@ -1,18 +1,31 @@
-package com.votingSystem.controllers;
+package com.votingSystem.controller;
 
-import com.votingSystem.entities.FormDataEntity;
+import com.votingSystem.entity.FormDataEntity;
+import com.votingSystem.service.CloudinaryService;
+import com.votingSystem.service.ImageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 
 @RestController
 @RequestMapping("/api")
 public class FormController {
+
+    @Autowired
+    CloudinaryService cloudinaryService;
+
+    @Autowired
+    ImageService imageService;
 
     @PostMapping("/submitForm")
     public String handleFormSubmit(
@@ -30,6 +43,18 @@ public class FormController {
         System.out.println("profilePic: " + profilePic);
         System.out.println("password: " + password);
         System.out.println("confirmPassword: " + confirmPassword);
+
+        try {
+            BufferedImage bi = ImageIO.read(profilePic.getInputStream());
+            if(bi == null){
+//                return new ResponseEntity<>("image not valid", HttpStatus.BAD_REQUEST);
+                System.out.println("Error in line 51");
+            }
+            String url = cloudinaryService.uploadImage(profilePic);
+            System.out.println(url);
+        } catch (IOException  e) {
+            System.out.println("Error in controller: " + e.getMessage());
+        }
 
         return "Form submitted successfully!";
 

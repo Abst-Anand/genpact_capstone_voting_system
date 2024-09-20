@@ -1,7 +1,7 @@
-package com.votingSystem.controllers;
+package com.votingSystem.controller;
 
-import com.votingSystem.entities.ProductEntity;
-import com.votingSystem.repositories.ProductRepository;
+import com.votingSystem.entity.ProductEntity;
+import com.votingSystem.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

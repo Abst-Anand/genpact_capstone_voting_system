@@ -1,6 +1,6 @@
-package com.votingSystem.repositories;
+package com.votingSystem.repository;
 
-import com.votingSystem.entities.ProductEntity;
+import com.votingSystem.entity.ProductEntity;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

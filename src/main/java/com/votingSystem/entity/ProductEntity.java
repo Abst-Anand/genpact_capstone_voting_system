@@ -1,4 +1,4 @@
-package com.votingSystem.entities;
+package com.votingSystem.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
