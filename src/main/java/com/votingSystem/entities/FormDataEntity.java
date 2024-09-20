@@ -1,4 +1,4 @@
-package com.japTutorial.jpaTuts.entities;
+package com.votingSystem.entities;
 
 import org.springframework.web.multipart.MultipartFile;
 

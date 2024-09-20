@@ -1,6 +1,6 @@
-package com.japTutorial.jpaTuts.repositories;
+package com.votingSystem.repositories;
 
-import com.japTutorial.jpaTuts.entities.ProductEntity;
+import com.votingSystem.entities.ProductEntity;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
