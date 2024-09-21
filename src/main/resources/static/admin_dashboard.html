@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="./css/admin_dashboard.css">
+
+</head>
+<body>
+<!-- Header -->
+<div id="header"></div> <!-- Header will be loaded here -->
+
+<!-- Dashboard Body Section with gradient background and centered container -->
+<div class="dashboard-body">
+    <div class="container" >
+        <!-- Horizontal button bar -->
+        <div class="button-bar">
+            <button class="tab-button active" data-section="createElection">Create Election</button>
+            <button class="tab-button" data-section="addOfficer">Add Regional Officer</button>
+            <button class="tab-button" data-section="addCandidate">Add Candidate</button>
+            <button class="tab-button" data-section="audit">Audit</button>
+        </div>
+
+        <!-- Section where tables will be displayed -->
+        <div class="section-content">
+            <div id="createElection" class="table-section active">
+                <!-- Content for Create Election -->
+                <table>
+                    <th>Create Election</th>
+                    <tr><td>Election Data</td></tr>
+                </table>
+            </div>
+            <div id="addOfficer" class="table-section">
+                <!-- Content for Add Regional Officer -->
+                <table>
+                    <tr><th>Add Regional Officer</th></tr>
+                    <tr><td>Officer Data</td></tr>
+                </table>
+            </div>
+            <div id="addCandidate" class="table-section" >
+                    <iframe src="candidate_form.html" width="100%" height="600" style="border:none; color: #007bff"></iframe>
+            </div>
+            <div id="audit" class="table-section">
+                <!-- Content for Audit -->
+                <table>
+                    <tr><th>Audit</th></tr>
+                    <tr><td>Audit Data</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/adminDashboard.js"></script>
+<script type="module" src="js/loadHeader.js" defer></script>
+<script type="module" src="js/loadContent.js" defer></script>
+<script>
+    document.getElementById('addCandidate').addEventListener('click', () => {
+        loadContent('candidate_form.html', 'contentContainer');
+    });
+</script>
+</body>
+</html>

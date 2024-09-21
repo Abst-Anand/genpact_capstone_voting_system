@@ -37,19 +37,22 @@ public class CloudinaryService {
         // Use a temporary file instead of creating in the current directory
         File tempFile = convertToTempFile(image);
 
-        try {
-            // Upload to Cloudinary
-            Map result = cloudinary.uploader().upload(tempFile, ObjectUtils.emptyMap());
-            System.out.println(result);
-            // Extract and return the URL
-            String url = result.get("url").toString();
-            System.out.println("Uploaded Image URL: " + url);
-            return url;
-        } finally {
-            // Always try to delete the temporary file after uploading
-            Files.deleteIfExists(tempFile.toPath());
+
+        // Upload the image to Cloudinary
+        Map uploadResult = cloudinary.uploader().upload(tempFile, ObjectUtils.emptyMap());
+
+        // Get the image public ID
+        String publicId = uploadResult.get("public_id").toString();
+
+        // Delete the local temporary file after upload
+        if (!Files.deleteIfExists(tempFile.toPath())) {
+            throw new IOException("Failed to delete file " + tempFile.getAbsolutePath());
         }
+
+
+        return publicId;
     }
+
 
 
     private File convertToTempFile(MultipartFile image) throws IOException {
