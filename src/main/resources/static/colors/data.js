@@ -4,7 +4,7 @@ export const COLORS = {
     "font-color": "#333333",
 
     "body-bg-light": "beige",
-    "body-bg-dark": "#777777",
+    "body-bg-dark": "#555555",
 
     "font-in-light-mode" : "black",
     "font-in-dark-mode" : "white"
