@@ -25,41 +25,42 @@
 
         <!-- Section where tables will be displayed -->
         <div class="section-content">
-            <div id="createElection" class="table-section active">
+
                 <!-- Content for Create Election -->
-                <table>
-                    <th>Create Election</th>
-                    <tr><td>Election Data</td></tr>
-                </table>
-            </div>
-            <div id="addOfficer" class="table-section">
-                <!-- Content for Add Regional Officer -->
-                <table>
-                    <tr><th>Add Regional Officer</th></tr>
-                    <tr><td>Officer Data</td></tr>
-                </table>
-            </div>
+                <div id="addElecon" class="table-section" >
+                    <iframe src="sim.p.html" title="Election Form" width="100%"  height="600" style="border:none; color: #007bff"></iframe>
+                </div>
+
+
+<!--            <div id="addOfficer" class="table-section">-->
+<!--                &lt;!&ndash; Content for Add Regional Officer &ndash;&gt;-->
+<!--                <div id="ddElection" class="table-section" >-->
+<!--                    <iframe src="election_form.html" width="100%" height="600" style="border:none; color: #007bff"></iframe>-->
+<!--                </div>-->
+<!--            </div>-->
+
             <div id="addCandidate" class="table-section" >
-                    <iframe src="candidate_form.html" width="100%" height="600" style="border:none; color: #007bff"></iframe>
+                    <iframe src="candidate_form.html" title="Candidate Form" width="100%" height="600" style="border:none; color: #007bff"></iframe>
             </div>
-            <div id="audit" class="table-section">
-                <!-- Content for Audit -->
-                <table>
-                    <tr><th>Audit</th></tr>
-                    <tr><td>Audit Data</td></tr>
-                </table>
-            </div>
+
+<!--            <div id="audit" class="table-section">-->
+<!--                &lt;!&ndash; Content for Audit &ndash;&gt;-->
+<!--                <table>-->
+<!--                    <tr><th>Audit</th></tr>-->
+<!--                    <tr><td>Audit Data</td></tr>-->
+<!--                </table>-->
+<!--            </div>-->
+
         </div>
     </div>
 </div>
 
 <script src="js/adminDashboard.js"></script>
 <script type="module" src="js/loadHeader.js" defer></script>
-<script type="module" src="js/loadContent.js" defer></script>
 <script>
-    document.getElementById('addCandidate').addEventListener('click', () => {
-        loadContent('candidate_form.html', 'contentContainer');
-    });
+
+
+
 </script>
 </body>
 </html>

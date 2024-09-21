@@ -69,10 +69,13 @@ table {
 
 th, td {
     padding: 10px;
-    border: 1px solid #ddd;
     text-align: left;
+
 }
 
 th {
     background-color: #f2f2f2;
+    border-left: 4px #C78A00 solid;
+    padding: 10px;
+
 }

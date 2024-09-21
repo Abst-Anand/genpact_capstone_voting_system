@@ -11,7 +11,7 @@ export async function handleFormSubmission(event) {
     const originalText = button.innerHTML;
 
     // Add loading spinner
-    button.innerHTML = 'Submitting... <div class="spinner"></div>';
+    button.innerHTML = 'Registering... <div class="spinner"></div>';
     button.disabled = true;
 
     try {
