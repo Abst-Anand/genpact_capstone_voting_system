@@ -6,8 +6,6 @@ html, body {
     height: 88vh;
 }
 
-
-
 /* Dashboard body styling with gradient background */
 .dashboard-body {
     background: linear-gradient(to bottom, #FF9933, white, #138808); /* Saffron, White, Green */
@@ -56,26 +54,17 @@ html, body {
 
 .table-section {
     display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .table-section.active {
     display: block;
+    opacity: 1;
 }
 
-table {
+iframe {
     width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-
-}
-
-th {
-    background-color: #f2f2f2;
-    border-left: 4px #C78A00 solid;
-    padding: 10px;
-
+    height: 600px;
+    border: none;
 }

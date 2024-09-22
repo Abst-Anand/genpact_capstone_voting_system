@@ -27,7 +27,7 @@ public class FormController {
     @Autowired
     ImageService imageService;
 
-    @PostMapping("/submitForm")
+    @PostMapping("/submitForm")   // /api/submitForm
     public String handleFormSubmit(
             @RequestParam("name") String name,
             @RequestParam("email") String email,

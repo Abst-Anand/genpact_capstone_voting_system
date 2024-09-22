@@ -58,6 +58,31 @@ input[type="file"] {
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+select,
+input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px; /* Adjust font size to match other inputs */
+}
+
+/* Optional: Add hover effect for dropdown */
+select:hover {
+    border-color: #007bff; /* Change to your preferred hover color */
+}
+
+/* Optional: Style for focused state */
+select:focus,
+input[type="date"]:focus {
+    border-color: #007bff; /* Change to your preferred focus color */
+    outline: none; /* Remove default outline */
+}
+
+
+
+
 #submitButton {
     background-color: #4CAF50;
     color: white;

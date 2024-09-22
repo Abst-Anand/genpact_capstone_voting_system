@@ -1,46 +1,53 @@
 
 <head>
-
     <link rel="stylesheet" href="css/forms.css">
+
+    <style>
+        #created_by::placeholder{
+            color: #b0c4de;
+            opacity: 1;
+            font-size: medium;
+        }
+    </style>
 
 </head>
 <body>
 
-<h2 style="color: black">New Election Creation </h2>
+<h2 style="color: black">Create New Election</h2>
 
 
-
-<form id="voterForm" action="#" method="post" enctype="multipart/form-data">
+<form id="voterForm"  method="post" enctype="multipart/form-data">
     
     <!-- Name -->
     <label for="name">Election Name:</label>
     <input type="text" id="name" name="name" placeholder="Enter Election Name" >
 
     <!-- Election Type -->
-    <label for="email">Election Type:</label>
-    <input type="month" id="email" name="email" placeholder="Enter your email" >
-    <select>
-        <option>Type1</option>
-        <option>Type2</option>
-        <option>Type3</option>
+    <!-- Dropdown Input -->
+    <label for="election_type">Election Type:</label>
+    <select id="election_type" name="election_type">
+        <option value="drop-down-default" selected style="font-size: small">Select an election type</option>
+        <option value="local">Local Election</option>
+        <option value="state">State Election</option>
+        <option value="national">National Election</option>
     </select>
 
     <!-- Start Date -->
-    <label for="start_date">Profile Picture:</label>
-    <input type="date" id="start_date" name="start_date" placeholder="Select Start Date">
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date">
 
     <!-- End Date -->
-    <label for="end_date">Password:</label>
-    <input type="date" id="end_date" name="end_date" placeholder="Select End Date" >
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date">
+
 
     <!-- Created By -->
     <label for="created_by">Created By:</label>
-    <input type="text" id="created_by" name="created_by" placeholder="Anand Raj" disabled>
+    <input type="text" id="created_by" name="created_by" placeholder="Anand Raj" style="cursor: not-allowed;" disabled>
 
 
 
     <!-- Submit Button -->
-<!--    <input type="submit" value="Register" id="submitButton">-->
     <div class="button-container">
         <button type="reset" id="resetButton">Reset</button>
         <button id="submitButton">Submit</button>
@@ -49,24 +56,6 @@
 
 </form>
 
-<script>
-    function formatID(input) {
-        // Remove any non-digit characters
-        let value = input.value.replace(/\D/g, '');
-
-        // Format the value with dashes
-        if (value.length > 8) {
-            value = value.replace(/^(\d{4})(\d{4})(\d{4})$/, '$1-$2-$3');
-        } else if (value.length > 4) {
-            value = value.replace(/^(\d{4})(\d{4})$/, '$1-$2');
-        }
-
-        // Set the formatted value back to the input field
-        input.value = value;
-    }
-
-
-</script>
 <script type="module">
     import { handleFormSubmission } from './js/submitForm.js'; // Adjust the path
 

@@ -1,3 +1,5 @@
+import {validateForm} from "./validateForm.js";
+
 export async function handleFormSubmission(event) {
     event.preventDefault(); // Prevent default form submission
 
@@ -11,10 +13,16 @@ export async function handleFormSubmission(event) {
     const originalText = button.innerHTML;
 
     // Add loading spinner
-    button.innerHTML = 'Registering... <div class="spinner"></div>';
+    button.innerHTML = 'Submitting... <div class="spinner"></div>';
     button.disabled = true;
 
     try {
+        //validate form data
+        console.log("before")
+        // await validateForm(formData);
+        console.log("after")
+
+
         // Send POST request to the server
         const response = await fetch('/api/submitForm', { // Ensure this path matches your backend
             method: 'POST',

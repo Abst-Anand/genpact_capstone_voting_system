@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    console.log("AdminDashboard js loaded")
     const buttons = document.querySelectorAll('.tab-button');
     const sections = document.querySelectorAll('.table-section');
 
