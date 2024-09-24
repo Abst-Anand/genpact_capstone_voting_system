@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.votingSystem.entity.Election" %>
+<%@ page import="com.votingSystem.entity.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,7 @@
 <body>
 <%
     List<Election> allElections = (List<Election>) request.getAttribute("allElections");
+    List<User> allSubAdmins = (List<User>) request.getAttribute("allSubAdmins");
 %>
 
 
@@ -65,56 +67,58 @@
     <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Type</th>
-        <th>Managed By</th>
+        <th>Email</th>
+        <th>Aadhar Number</th>
         <th>Authority</th>
         <th>Manage Authority</th>
     </tr>
     </thead>
     <tbody>
+    <%
+        if (!allSubAdmins.isEmpty()){
+            for(User user : allSubAdmins){
+
+         %>
     <tr>
-        <td>101</td>
-        <td>Project A</td>
-        <td>Type 1</td>
-        <td>Alice Smith</td>
-        <td class="status-active">Active</td>
-        <td class="action-icons">
+        <td> <%=user.getUserId() %> </td>
+        <td> <%=user.getName() %> </td>
+        <td> <%=user.getEmail() %> </td>
+        <td> <%=user.getAadharNumber() %> </td>
 
-                <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/manageAuthority?revoker=201&revokee=12')">
-                    <i class="fas fa-times-circle"></i>
-                </button>
+        <%
+            if(user.isAuthorityRevoked()){
 
-        </td>
-    </tr>
-    <tr>
-        <td>102</td>
-        <td>Project B</td>
-        <td>Type 2</td>
-        <td>John Doe</td>
-        <td class="status-inactive">Inactive</td>
-        <td class="action-icons">
+        %>
+                <td class="status-inactive">Inactive</td>
+                <td class="action-icons">
 
-                <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/manageAuthority?revoker=18&revokee=45')">
-                    <i class="fas fa-check-circle"></i>
-                </button>
+                    <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/manageAuthority?admin=18&subAdmin=<%=user.getUserId() %>')">
+                        <i class="fas fa-check-circle"></i>
+                    </button>
+                </td>
+            <%
+            }else{
+            %>
+                <td class="status-active">Active</td>
+                <td class="action-icons">
+                    <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/manageAuthority?admin=45&subAdmin=<%=user.getUserId() %>')">
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                </td>
 
-
-        </td>
-    </tr>
-    <tr>
-        <td>103</td>
-        <td>Project C</td>
-        <td>Type 1</td>
-        <td>Jane Doe</td>
-        <td class="status-active">Active</td>
-        <td class="action-icons">
-            <button class="icon-button icon-revoke" title="Revoke Authority"
-                    onclick="confirmAction('/manageAuthority?revoker=45&revokee=63')">
-                <i class="fas fa-times-circle"></i>
-            </button>
-        </td>
 
     </tr>
+
+           <%}
+            }
+        }else {
+            %>
+            <tr> -- No Sub Admins -- </tr>
+        <%
+        }
+        %>
+
+
     </tbody>
 </table>
 

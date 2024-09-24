@@ -15,10 +15,10 @@ import java.net.URI;
 public class ManageAuthority {
 
     @GetMapping
-    public String manageAuthority(@RequestParam int revoker, @RequestParam String revokee) {
+    public String manageAuthority(@RequestParam int admin, @RequestParam String subAdmin) {
 
-        System.out.println("revoker: " + revoker);
-        System.out.println("revokee: " + revokee);
+        System.out.println("admin: " + admin);
+        System.out.println("subAdmin: " + subAdmin);
 
 //        return ResponseEntity.status(HttpStatus.FOUND)
 //                .location(URI.create("/admin_dashboard.html"))
