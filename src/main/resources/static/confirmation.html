@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation</title>
+    <link rel="stylesheet" href="css/confirmation.css">
+</head>
+<body>
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <h3>Are you sure you want to proceed?</h3>
+        <div class="button-container">
+            <button id="cancelButton">Cancel</button>
+            <button id="confirmButton">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Event listeners for buttons inside the modal
+    document.addEventListener('DOMContentLoaded', () => {
+        // When the modal confirm button is clicked
+        document.getElementById('confirmButton').addEventListener('click', function() {
+            // Handle confirmation logic (e.g., redirect, call a function)
+            window.location.href = document.querySelector('.modal a').href; // Use the link in modal
+        });
+
+        // When the modal cancel button is clicked
+        document.getElementById('cancelButton').addEventListener('click', function() {
+            // Close the modal
+            document.getElementById('confirmationModal').style.display = 'none';
+        });
+    });
+</script>
+
+
+</body>
+</html>

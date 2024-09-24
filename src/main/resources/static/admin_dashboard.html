@@ -20,19 +20,24 @@
         <!-- Horizontal button bar -->
         <div class="button-bar">
 
-            <button class="tab-button active" data-section="createElection">Create Election</button>
+            <button class="tab-button active" data-section="addTable">Consolidated Information</button>
+            <button class="tab-button" data-section="createElection">Create Election</button>
             <button class="tab-button" data-section="addOfficer">Add Regional Officer</button>
-            <button class="tab-button" data-section="addTable">Table</button>
             <button class="tab-button" data-section="addCandidate">Add Candidate</button>
-            <button class="tab-button" data-section="audit">Audit</button>
+            <button class="tab-button" data-section="audit">Profile</button>
         </div>
 
         <!-- Section where iframes will be displayed -->
         <div class="section-content">
 
+            <!-- Content for Table -->
+            <div id="addTable" class="table-section active">
+                <iframe src="admin_consolidated_info.html" title="Admin Table Form" width="100%" height="600" style="border:none;"></iframe>
+            </div>
+
 
             <!-- Content for Create Election -->
-            <div id="createElection" class="table-section active">
+            <div id="createElection" class="table-section">
                 <iframe src="election_form.html" title="Election Form" width="100%" height="600" style="border:none;"></iframe>
             </div>
 
@@ -40,17 +45,13 @@
                 <iframe src="subAdmin_form.html" title="Add Regional Officer" width="100%" height="600" style="border:none;"></iframe>
             </div>
 
-            <!-- Content for Table -->
-            <div id="addTable" class="table-section active">
-                <iframe src="admin_table.html" title="Election Form" width="100%" height="600" style="border:none;"></iframe>
-            </div>
 
             <div id="addCandidate" class="table-section">
                 <iframe src="candidate_form.html" title="Candidate Form" width="100%" height="600" style="border:none;"></iframe>
             </div>
 
             <div id="audit" class="table-section">
-                <iframe src="audit.html" title="Audit" width="100%" height="600" style="border:none;"></iframe>
+                <iframe src="test.html" title="Audit" width="100%" height="600" style="border:none;"></iframe>
             </div>
         </div>
     </div>
