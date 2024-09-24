@@ -1,14 +1,22 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.votingSystem.entity.Election" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/tables.css">
-    <link rel="stylesheet" href="css/confirmation.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/tables.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/confirmation.css">
 
 </head>
 <body>
+<%
+    List<Election> allElections = (List<Election>) request.getAttribute("allElections");
+%>
+
+
 <h2 style="color: black">All Election Information</h2>
+
 
 <table>
     <thead>
@@ -18,38 +26,34 @@
         <th>Type</th>
         <th>Start Date</th>
         <th>End Date</th>
+        <th>Created By</th>
         <th>Managed By</th>
-        <th>Status</th>
     </tr>
     </thead>
     <tbody>
+
+    <%
+        if(!allElections.isEmpty()){
+            for(Election election : allElections){
+            %>
     <tr>
-        <td>101</td>
-        <td>Project A</td>
-        <td>Type 1</td>
-        <td>2024-09-09</td>
-        <td>2024-09-09</td>
-        <td>Alice Smith</td>
-        <td class="status-active">Active</td>
+        <td><%=election.getElectionId() %></td>
+        <td><%=election.getElectionName() %></td>
+        <td><%=election.getElectionType() %></td>
+        <td><%=election.getStartDate() %></td>
+        <td><%=election.getEndDate() %></td>
+        <td><%=election.getCreatedBy() %></td>
+        <td><%=election.getAssingedTo() %></td>
+
     </tr>
-    <tr>
-        <td>102</td>
-        <td>Project B</td>
-        <td>Type 2</td>
-        <td>2024-02-19</td>
-        <td>2024-12-21</td>
-        <td>John Doe</td>
-        <td class="status-inactive">Inactive</td>
-    </tr>
-    <tr>
-        <td>103</td>
-        <td>Project C</td>
-        <td>Type 1</td>
-        <td>2023-02-19</td>
-        <td>2022-12-21</td>
-        <td>Jane Doe</td>
-        <td class="status-active">Active</td>
-    </tr>
+
+<%      }
+    }else{
+    %>
+          <tr> -- No Elections -- </tr>
+<%
+   }%>
+
     </tbody>
 </table>
 
