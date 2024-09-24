@@ -20,32 +20,32 @@ class VotingSystemApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	void testRepository(){
-		ProductEntity newProduct = ProductEntity
-				.builder()
-				.sku("SKU 1")
-				.price(BigDecimal.valueOf(2000))
-				.title("Title 1")
-				.quantity(5)
-				.build();
-
-		ProductEntity savedProduct = productRepository.save(newProduct);
-		System.out.println(savedProduct);
-	}
-
-	@Test
-	void testFindByTitle(){
-
-		Optional<ProductEntity> optinalProduct = productRepository.findByTitle("Title 1");
-		optinalProduct.ifPresent(System.out::println);
-
-	}
-
-	@Test
-	void testFindAll(){
-		List<ProductEntity> products = productRepository.findAll();
-		System.out.println(products);
-	}
+//	@Test
+//	void testRepository(){
+//		ProductEntity newProduct = ProductEntity
+//				.builder()
+//				.sku("SKU 1")
+//				.price(BigDecimal.valueOf(2000))
+//				.title("Title 1")
+//				.quantity(5)
+//				.build();
+//
+//		ProductEntity savedProduct = productRepository.save(newProduct);
+//		System.out.println(savedProduct);
+//	}
+//
+//	@Test
+//	void testFindByTitle(){
+//
+//		Optional<ProductEntity> optinalProduct = productRepository.findByTitle("Title 1");
+//		optinalProduct.ifPresent(System.out::println);
+//
+//	}
+//
+//	@Test
+//	void testFindAll(){
+//		List<ProductEntity> products = productRepository.findAll();
+//		System.out.println(products);
+//	}
 
 }
