@@ -117,6 +117,7 @@ h2{
     border: 1px solid #ddd;
     text-align: left;
     border-left: 4px #C78A00 solid;
+    border-radius: 4px;
 }
 input[type="submit"]:hover {
     background-color: #45a049;
