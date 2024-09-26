@@ -20,8 +20,14 @@
 
     <!-- Right Section: Profile Details -->
     <div class="right-section">
+
         <div class="profile-details">
             <h2>Profile Details</h2>
+
+            <!-- Logout Button -->
+            <form action="/logout" method="post">
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
 
             <div class="profile-info">
                 <label for="profile_role">Role:</label>
@@ -58,6 +64,7 @@
                 <button class="close-btn" onclick="closeAlert('failedAlert')">&times;</button>
                 <p><strong>Failed!</strong> There was an error changing your password.</p>
             </div>
+
         </div>
     </div>
 </div>

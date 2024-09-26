@@ -36,6 +36,7 @@ h2{
 .right-section {
     width: 70%;
     padding-left: 40px;
+
 }
 
 .profile-picture img {
@@ -189,3 +190,17 @@ h2{
     color: #721c24; /* Dark red */
 }
 
+/* Logout Button */
+.logout-button {
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.logout-button:hover {
+    background-color: darkred;
+}
