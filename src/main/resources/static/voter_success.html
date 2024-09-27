@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Success</title>
+    <link rel="stylesheet" href="./css/success.css">
+</head>
+<body>
+<!-- Success Message Section -->
+<div class="success-container">
+    <div class="success-box">
+        <h1>Thank you for voting!</h1>
+        <p>Your vote has been successfully recorded.</p>
+
+        <div class="candidate-info">
+            <h3>You voted for:</h3>
+            <p id="candidateName"></p>
+            <p id="partyName"></p>
+            <img id="partyLogo" alt="Party Logo" width="100">
+        </div>
+
+        <button onclick="returnToDashboard()">Return to Dashboard</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<script>
+    // Simulate retrieving the candidate information from the voting page or server
+    const candidateData = {
+        name: 'Harsha Singh',        // This would be dynamically set based on who the voter selected
+        party: 'India Party',
+        logo: 'images/india_party_logo.png'
+    };
+
+    // Populate the success page with candidate info
+    document.getElementById('candidateName').innerText = candidateData.name;
+    document.getElementById('partyName').innerText = candidateData.party;
+    document.getElementById('partyLogo').src = candidateData.logo;
+
+    // Functions for the buttons
+    function returnToDashboard() {
+        window.location.href = 'voter_dashboard.html';  // Redirect to the voter dashboard
+    }
+
+    function logout() {
+        window.location.href = 'logout.html';  // Redirect to the logout page (or handle logout here)
+    }
+</script>
+</body>
+</html>

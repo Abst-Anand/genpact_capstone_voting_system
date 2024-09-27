@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <title>Voter Dashboard</title>
+    <link rel="stylesheet" href="./css/voter_dashboard.css">
+</head>
+<body>
+<!-- Header -->
+<div id="header"></div> <!-- Header will be loaded here -->
+
+<!-- Dashboard Body Section with gradient background and centered container -->
+<div class="dashboard-body">
+
+    <div class="container">
+        <!-- Horizontal button bar -->
+        <div class="button-bar">
+            <button class="tab-button active" data-section="viewElections">View Elections</button>
+            <button class="tab-button" data-section="profile">Profile</button>
+        </div>
+
+        <!-- Section where election list will be displayed -->
+        <div class="section-content">
+
+            <!-- View Elections Section -->
+            <div id="viewElections" class="table-section active">
+                <h2>Ongoing Elections</h2>
+                <table class="election-table">
+                    <thead>
+                    <tr>
+                        <th>Candidate Name</th>
+                        <th>Party Name</th>
+                        <th>Party Logo</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Abhishek Verma</td>
+                        <td>Hamari Party</td>
+                        <td><img src="images/hamari_party_logo.png" alt="Hamari Party Logo" width="50"></td>
+                        <td><button class="vote-button" data-candidate="Abhishek Verma">Vote</button></td>
+                    </tr>
+                    <tr>
+                        <td>Harsha Singh</td>
+                        <td>India Party</td>
+                        <td><img src="images/india_party_logo.png" alt="India Party Logo" width="50"></td>
+                        <td><button class="vote-button" data-candidate="Harsha Singh">Vote</button></td>
+                    </tr>
+                    <tr>
+                        <td>Vineet Karma</td>
+                        <td>Hum Party</td>
+                        <td><img src="images/hum_party_logo.png" alt="Hum Party Logo" width="50"></td>
+                        <td><button class="vote-button" data-candidate="Vineet Karma">Vote</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Profile Section -->
+            <div id="profile" class="table-section">
+                <iframe src="voter_profile.html" title="Voter Profile" width="100%" height="600" style="border:none;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Popup -->
+<div id="confirmationPopup" class="popup hidden">
+    <div class="popup-content">
+        <h3>Confirm Your Vote</h3>
+        <p>Are you sure you want to vote for <span id="candidateName"></span>?</p>
+        <button id="confirmVote">Confirm</button>
+        <button id="cancelVote">Cancel</button>
+    </div>
+</div>
+
+<script src="js/voterDashboard.js"></script>
+<script type="module" src="js/loadHeader.js"></script>
+</body>
+</html>
