@@ -1,10 +1,7 @@
 package com.votingSystem.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 /* Role 1=Admin, 2=SubAdmin, 3=Voter
 * */
@@ -17,19 +14,36 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
     private String name;
+
+    @Column(unique=true)
     private String email;
     private int profilePictureId;
+    @Column(unique=true)
     private String aadharNumber;
     private int role;
     private String password;
     private boolean isAuthorityRevoked;
+    @Column(nullable = true)
     private int createdBy;
+    private boolean isApproved;
 
     public User(){
         super();
     }
 
-    public User(String name, String email, int profilePictureId,String aadharNumber, int role, String password, int createdBy) {
+    public User(String name, String email, int profilePictureId,String aadharNumber, int role, String password, boolean isApproved) {
+        super();
+        this.name = name;
+        this.email = email;
+        this.profilePictureId = profilePictureId;
+        this.aadharNumber = aadharNumber;
+        this.role = role;
+        this.password = password;
+        this.isAuthorityRevoked = false;
+        this.isApproved = isApproved;
+    }
+
+    public User(String name, String email, int profilePictureId,String aadharNumber, int role, String password, int createdBy, boolean isApproved) {
         super();
         this.name = name;
         this.email = email;
@@ -39,9 +53,10 @@ public class User {
         this.password = password;
         this.createdBy = createdBy;
         this.isAuthorityRevoked = false;
+        this.isApproved = isApproved;
     }
 
-    public User(int userId,String name, String email, int profilePictureId, String aadharNumber, int role, String password, int createdBy) {
+    public User(int userId,String name, String email, int profilePictureId, String aadharNumber, int role, String password, int createdBy, boolean isApproved) {
         super();
         this.userId = userId;
         this.name = name;
@@ -51,6 +66,7 @@ public class User {
         this.role = role;
         this.password = password;
         this.createdBy = createdBy;
+        this.isApproved = isApproved;
     }
 
     public int getUserId() {
@@ -59,6 +75,14 @@ public class User {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
     }
 
     public String getName() {

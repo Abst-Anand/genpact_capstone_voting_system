@@ -43,16 +43,16 @@
 
   <div class="right-section">
     <h2>Login</h2>
-    <form class="login-form">
+    <form class="login-form" action="/user/login" method="post">
       <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Enter your email" required>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
       <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Enter your password" required>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
       <button type="submit">Login</button>
 
-      <p class="voter-register-link"><a href="#" style="text-decoration: none;"><strong style="color: red">New Voter Registration?</strong></a></p>
+      <p class="voter-register-link"><a href="/user/registration-form" style="text-decoration: none;"><strong style="color: red">New Voter Registration?</strong></a></p>
 
     </form>
   </div>

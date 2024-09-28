@@ -48,6 +48,7 @@ public class CloudinaryService {
         if (!Files.deleteIfExists(tempFile.toPath())) {
             throw new IOException("Failed to delete file " + tempFile.getAbsolutePath());
         }
+        Files.deleteIfExists(tempFile.toPath());
 
 
         return publicId;

@@ -37,6 +37,7 @@ h2{
     width: 70%;
     padding-left: 40px;
 
+
 }
 
 .profile-picture img {
@@ -72,6 +73,7 @@ h2{
 
 .profile-info {
     margin-bottom: 15px;
+    margin-top: 5%;
 }
 
 .profile-info label {
@@ -198,7 +200,9 @@ h2{
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
+    position: absolute;
+    top: 90px;
+    right: 20px;
 }
 
 .logout-button:hover {

@@ -1,17 +1,25 @@
+<%@ page import="java.util.Map" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-    <link rel="stylesheet" href="css/profile.css"> <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css"> <!-- Link to external CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome for icons -->
 </head>
 <body>
+
+<%
+    String cloudinaryPrefix = "https://res.cloudinary.com/dl1hqxniz/image/upload/v1727458264/";
+    Map<String,String> userDetails = (Map<String, String>) request.getAttribute("userDetails");
+    System.out.println("Profile Map:" + userDetails.values());
+    String imageLink = cloudinaryPrefix + userDetails.get("imagePublicId");
+%>
 
 <div class="profile-container">
     <!-- Left Section: Profile Picture -->
     <div class="left-section">
         <div class="profile-picture">
-            <img src="images/profile_pic_default.jpg" alt="Profile Picture">
+            <img src="<%= imageLink%>" alt="Profile Picture">
         </div>
         <div class="update-picture">
             <button class="btn" disabled>Update Picture</button>
@@ -31,22 +39,22 @@
 
             <div class="profile-info">
                 <label for="profile_role">Role:</label>
-                <p id="profile_role" style="color: red">[ <strong> REGIONAL OFFICER </strong>]</p>
+                <p id="profile_role" style="color: red">[ <strong> <%=userDetails.get("role")%> </strong>]</p>
             </div>
 
             <div class="profile-info">
                 <label for="profile-id">Id:</label>
-                <p id="profile-id">123456</p>
+                <p id="profile-id"> <%=userDetails.get("userId")%> </p>
             </div>
 
             <div class="profile-info">
                 <label for="profile-name">Name:</label>
-                <p id="profile-name">John Doe</p>
+                <p id="profile-name"> <%=userDetails.get("name")%> </p>
             </div>
 
             <div class="profile-info">
                 <label for="profile-email">Email:</label>
-                <p id="profile-email">johndoe@example.com</p>
+                <p id="profile-email"> <%=userDetails.get("email")%> </p>
             </div>
 
             <div class="profile-info password-field">
