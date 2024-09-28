@@ -21,15 +21,15 @@ import java.util.Objects;
 @Service
 public class CloudinaryService {
 
-    @Autowired
+
     private Environment env;
 
     Cloudinary cloudinary;
 
-//    File tempStoreDirectory = new File("src/main/resources/uploadedImages");
 
 
-    public CloudinaryService() {
+    public CloudinaryService(Environment envn) {
+        this.env = envn;
         Map<String,String> credentials = new HashMap<String,String>();
         credentials.put("cloud_name",env.getProperty("cloudinary.cloud_name"));
         credentials.put("api_key",env.getProperty("cloudinary.api_key"));

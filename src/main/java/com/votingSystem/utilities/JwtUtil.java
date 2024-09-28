@@ -20,7 +20,7 @@ public class JwtUtil {
 
     public String generateJwtToken(User user){
 
-        long timeout = 1000 * 60 * 60L;
+        long timeout = 1000 * 60 * 60L; // 1min
         Date issuedAt = new Date();
         Date expirationAt = new Date(issuedAt.getTime() + timeout);
 

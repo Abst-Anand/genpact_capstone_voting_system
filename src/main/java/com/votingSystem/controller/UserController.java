@@ -51,9 +51,11 @@ public class UserController {
             Model model
     ){
 
-//        System.out.println("/user/voter-registration");
+        System.out.println("/userr/voter-registration called");
         String imagePublicUrlId;
         int role = 3;
+
+        email = email.toLowerCase();
 
         try {
             imagePublicUrlId = cloudinaryService.uploadImage(profilePic);
@@ -79,7 +81,7 @@ public class UserController {
             model.addAttribute("failureMessage", failureMessage);
         }
 
-        return "redirect:/user/registration-form";
+        return "redirect:/";
     }
 
     @PostMapping("/login")
@@ -89,6 +91,7 @@ public class UserController {
                         Model model) {
 
         System.out.println("/user/login called");
+        email = email.toLowerCase();
         Optional<User> userOptional = userService.findUserByEmail(email);
 
         if(userOptional.isEmpty()) {

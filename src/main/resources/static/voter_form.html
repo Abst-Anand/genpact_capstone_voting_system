@@ -1,5 +1,7 @@
 <head>
     <link rel="stylesheet" href="css/forms.css">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <title>ECI | Voter Registration</title>
 </head>
 <body>
 <!-- Header -->
@@ -7,7 +9,8 @@
 
 <h2 style="color: black">Voter Registration Form</h2>
 
-<form id="voterForm" action="/user/voter-registration" method="post" enctype="multipart/form-data">
+<form id="voterForm" action="/user/voter-registration" method="post" enctype="multipart/form-data"
+      onsubmit="return validate()">
 
     <!-- Name -->
     <label for="name">Full Name:</label>
@@ -15,11 +18,11 @@
 
     <!-- Email -->
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" placeholder="Enter your email"  required>
+    <input type="email" id="email" name="email" placeholder="Enter your email" >
 
     <!-- 12-Digit Number (Aadhar) -->
     <label for="aadharNumber">Aadhar Number:</label>
-    <input type="text" id="aadharNumber" name="aadharNumber" placeholder="e.g. 123456789012" maxlength="12">
+    <input type="text" id="aadharNumber" name="aadharNumber" placeholder="e.g. 123456789012" maxlength="12" >
 
     <!-- Profile Picture -->
     <label for="profilePic">Profile Picture:</label>
@@ -45,14 +48,14 @@
     <!-- Submit and Reset Button -->
     <div class="button-container">
         <button type="reset" id="resetButton">Reset</button>
-        <button type="button" id="submitButton">Submit</button>
+        <button type="submit" id="submitButton">Submit</button>
     </div>
 
     <!-- Alert Messages -->
     <div class="alert-position">
         <div class="alert-box failed" id="failedAlert" style="display:none;">
             <button class="close-btn" onclick="closeAlert('failedAlert')">&times;</button>
-            <p id="errorMessage"></p>
+            <p id="errorMessage" style="font-weight: bold"></p>
         </div>
         <div class="alert-box success" id="successAlert" style="display:none;">
             <button class="close-btn" onclick="closeAlert('successAlert')">&times;</button>
@@ -77,13 +80,15 @@
     });
 
     // Form validation
-    submitButton.addEventListener('click', (event) => {
-        event.preventDefault();
+    function validate() {
+
         let errorMessage = '';
 
         // Validate fields
         if (!document.getElementById('name').value) {
             errorMessage += '<br>Full Name is required.<br>';
+        }else if(document.getElementById('name').value.length <=3){
+            errorMessage += '<br>Length of Full Name should be greater than 3.<br>'
         }
         if (!document.getElementById('email').value) {
             errorMessage += '<br>Email is required.<br>';
@@ -91,35 +96,35 @@
         if (!document.getElementById('aadharNumber').value) {
             errorMessage += '<br>Aadhar Number is required.<br>';
         } else if (document.getElementById('aadharNumber').value.length < 12) {
-        errorMessage += '<br>Aadhar Number must be of 12 digits.<br>';
+            errorMessage += '<br>Aadhar Number must be of 12 digits.<br>';
+        }
+        if (!document.getElementById('profilePic').files || document.getElementById('profilePic').files.length === 0){
+            errorMessage += '<br>Profile Picture is required.<br>'
         }
         if (!document.getElementById('password').value) {
             errorMessage += '<br>Password is required.<br>';
-        }else{
-            errorMessage = validatePassword(document.getElementById('password').value)
+        } else {
+            errorMessage += validatePassword(document.getElementById('password').value)
         }
         if (document.getElementById('password').value !== document.getElementById('confirmPassword').value) {
             errorMessage += '<br>Passwords do not match.<br>';
         }
 
-        // If there's an error, show alert
-        if (errorMessage) {
+        if(errorMessage){
             document.getElementById('errorMessage').innerHTML = errorMessage;
             document.getElementById('failedAlert').style.display = 'flex';
-            return;
+            return false
         }
 
-        // Proceed with form submission (fake success alert for now)
+
+        // Proceed with form submission
         submitButton.innerHTML = 'Submitting... <div class="spinner"></div>';
         submitButton.disabled = true;
+        document.getElementById('failedAlert').style.display = 'none';  // Hide error alert if no error
+        return true;
 
-        // Simulate form submission success
-        setTimeout(() => {
-            submitButton.innerHTML = 'Submit';
-            submitButton.disabled = false;
-            document.getElementById('successAlert').style.display = 'flex';
-        }, 2000);
-    });
+
+    }
 
     function closeAlert(alertId) {
         document.getElementById(alertId).style.display = 'none';
