@@ -2,9 +2,12 @@ package com.votingSystem.service;
 
 
 import com.cloudinary.utils.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cloudinary.Cloudinary;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.core.env.Environment;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,6 +21,9 @@ import java.util.Objects;
 @Service
 public class CloudinaryService {
 
+    @Autowired
+    private Environment env;
+
     Cloudinary cloudinary;
 
 //    File tempStoreDirectory = new File("src/main/resources/uploadedImages");
@@ -25,9 +31,9 @@ public class CloudinaryService {
 
     public CloudinaryService() {
         Map<String,String> credentials = new HashMap<String,String>();
-        credentials.put("cloud_name","dl1hqxniz");
-        credentials.put("api_key","991186715386794");
-        credentials.put("api_secret","DRe3emNxu61NGeljxDEUEMrVopE");
+        credentials.put("cloud_name",env.getProperty("cloudinary.cloud_name"));
+        credentials.put("api_key",env.getProperty("cloudinary.api_key"));
+        credentials.put("api_secret",env.getProperty("cloudinary.api_secret"));
 
         cloudinary = new Cloudinary(credentials);
     }

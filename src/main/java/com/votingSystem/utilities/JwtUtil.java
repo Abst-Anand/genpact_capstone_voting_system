@@ -4,6 +4,7 @@ import com.votingSystem.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,7 +14,8 @@ import java.util.Map;
 @Service
 public class JwtUtil {
 
-    private String secretKey = "kashcbiughausigdg7575mljk7897ddjbablkhsudivi82734kjbksfla";
+    @Value("${jwt.secret_key}")
+    private String secretKey;
 
 
     public String generateJwtToken(User user){
