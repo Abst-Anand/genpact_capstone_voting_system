@@ -45,11 +45,6 @@ public class FormController {
         System.out.println("confirmPassword: " + confirmPassword);
 
         try {
-            BufferedImage bi = ImageIO.read(profilePic.getInputStream());
-            if(bi == null){
-//                return new ResponseEntity<>("image not valid", HttpStatus.BAD_REQUEST);
-                System.out.println("Error in line 51");
-            }
             String url = cloudinaryService.uploadImage(profilePic);
             System.out.println(url);
         } catch (IOException  e) {

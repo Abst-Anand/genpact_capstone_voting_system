@@ -8,6 +8,4 @@ export const COLORS = {
 
     "font-in-light-mode" : "black",
     "font-in-dark-mode" : "white"
-
-
 }

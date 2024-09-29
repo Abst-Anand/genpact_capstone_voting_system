@@ -2,9 +2,12 @@ package com.votingSystem.service;
 
 
 import com.cloudinary.utils.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cloudinary.Cloudinary;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.core.env.Environment;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,15 +21,18 @@ import java.util.Objects;
 @Service
 public class CloudinaryService {
 
+    private Environment env;
+
     Cloudinary cloudinary;
 
-//    File tempStoreDirectory = new File("src/main/resources/uploadedImages");
+ 
 
 
-    public CloudinaryService() {
+    public CloudinaryService(Environment envn) {
+        this.env = envn;
         Map<String,String> credentials = new HashMap<String,String>();
-        credentials.put("cloud_name","dl1hqxniz");
-        credentials.put("api_key","991186715386794");
+        credentials.put("cloud_name", "dl1hqxniz" );
+        credentials.put("api_key" , "991186715386794");
         credentials.put("api_secret","DRe3emNxu61NGeljxDEUEMrVopE");
 
         cloudinary = new Cloudinary(credentials);
@@ -48,6 +54,7 @@ public class CloudinaryService {
         if (!Files.deleteIfExists(tempFile.toPath())) {
             throw new IOException("Failed to delete file " + tempFile.getAbsolutePath());
         }
+        Files.deleteIfExists(tempFile.toPath());
 
 
         return publicId;

@@ -15,8 +15,8 @@ public class ImageService {
     @Autowired
     ImageRepository imageRepository;
 
-    public Optional<Image> getImage(int id) {
-        return imageRepository.getImageByImageId(id);
+    public Image getImage(int id) {
+        return imageRepository.getImageByImageId(id).orElseThrow(()-> new RuntimeException("Image not found"));
     }
 
     public Image saveImage(Image image) {

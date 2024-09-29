@@ -26,9 +26,22 @@ public class UserService {
         return userRepository.findUserByRoleEquals(2);
     }
 
-//    public int updateUserById(int userId, User user) {
-//        return userRepository.updateUserByUserId(userId, user);
-//    }
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public boolean signUp(User user) {
+
+        Optional<User> existingUser = findUserByEmail(user.getEmail());
+        if (existingUser.isPresent()) {
+            return false;
+        }
+
+        User newUser = userRepository.save(user);
+
+        return true;
+
+    }
 
 
 
