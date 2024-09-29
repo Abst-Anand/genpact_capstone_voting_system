@@ -21,19 +21,19 @@ import java.util.Objects;
 @Service
 public class CloudinaryService {
 
-
     private Environment env;
 
     Cloudinary cloudinary;
 
+ 
 
 
     public CloudinaryService(Environment envn) {
         this.env = envn;
         Map<String,String> credentials = new HashMap<String,String>();
-        credentials.put("cloud_name",env.getProperty("cloudinary.cloud_name"));
-        credentials.put("api_key",env.getProperty("cloudinary.api_key"));
-        credentials.put("api_secret",env.getProperty("cloudinary.api_secret"));
+        credentials.put("cloud_name", "dl1hqxniz" );
+        credentials.put("api_key" , "991186715386794");
+        credentials.put("api_secret","DRe3emNxu61NGeljxDEUEMrVopE");
 
         cloudinary = new Cloudinary(credentials);
     }

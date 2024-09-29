@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <title>ECI | Election Commissioner</title>
+    <link rel="stylesheet" href="./css/admin_dashboard.css">
+</head>
+<body>
+<!-- Header -->
+<div id="header"></div> <!-- Header will be loaded here -->
+
+
+
+<!-- Dashboard Body Section with gradient background and centered container -->
+<div class="dashboard-body">
+
+    <div class="container">
+        <!-- Horizontal button bar -->
+        <div class="button-bar">
+
+            <button class="tab-button " data-section="addTables">List of Canditates to vote</button>
+            <button class="tab-button active" data-section="audit">Profile</button>
+        </div>
+
+        <!-- Section where iframes will be displayed -->
+        <div class="section-content">
+
+            <!-- Content for Table -->
+            <div id="addTables" class="table-section active">
+                <iframe src="/admin/info" title="Admin Tables" width="100%" height="600" style="border:none;"></iframe>
+            </div>
+
+
+            <!-- Content for Create Election -->
+            <div id="createElection" class="table-section">
+                <iframe src="election_form.html" title="Election Form" width="100%" height="600" style="border:none;"></iframe>
+            </div>
+
+            <div id="addOfficer" class="table-section">
+                <iframe src="subAdmin_form.html" title="Add Regional Officer" width="100%" height="600" style="border:none;"></iframe>
+            </div>
+
+
+            <div id="addCandidate" class="table-section">
+                <iframe src="candidate_form.html" title="Candidate Form" width="100%" height="600" style="border:none;"></iframe>
+            </div>
+
+            <div id="audit" class="table-section">
+                <iframe src="/user/profile" title="Audit" width="100%" height="600" style="border:none;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/adminDashboard.js"></script>
+<script type="module" src="js/loadHeader.js"></script>
+
+</body>
+</html>
