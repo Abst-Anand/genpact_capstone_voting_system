@@ -2,65 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Manage Table</title>
-  <link rel="stylesheet" href="css/confirmation.css">
+  <title>Test</title>
+  <link rel="stylesheet" href="css/globalAlert.css">
 </head>
 <body>
-<h2>Manage Table</h2>
+<div id="alert"></div>
 
-<!-- Sample Table -->
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Action</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>1</td>
-    <td>Election 1</td>
-    <td>
-      <button onclick="confirmAction('https://example.com/action/1')">Authorize</button>
-    </td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Election 2</td>
-    <td>
-      <button onclick="confirmAction('https://example.com/action/2')">Authorize</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
-<!-- Confirmation Modal -->
-<div id="confirmationModal" class="modal" style="display: none">
-  <div class="modal-content">
-    <h3>Are you sure you want to proceed?</h3>
-    <div class="button-container">
-      <button id="cancelButton">Cancel</button>
-      <button id="confirmButton">Confirm</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  function confirmAction(actionUrl) {
-    const modal = document.getElementById('confirmationModal');
-    modal.style.display = 'block';
-
-    document.getElementById('confirmButton').onclick = function() {
-      // If confirmed, execute the action and refresh the main page
-      window.top.location.href = actionUrl;
-    };
-
-    document.getElementById('cancelButton').onclick = function() {
-      // If canceled, close the modal and do nothing
-      modal.style.display = 'none';
-    };
-  }
-</script>
 </body>
+
+<script type="module">
+import {showAlert} from "./js/globalAlert.js";
+
+document.addEventListener('DOMContentLoaded', showAlert('success','Registration Successful! Your data will be reviewed and approved soon.'))
+</script>
 </html>

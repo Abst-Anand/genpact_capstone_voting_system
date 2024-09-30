@@ -1,4 +1,6 @@
 <%@ page import="java.util.Map" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +13,7 @@
 <%
     String cloudinaryPrefix = "https://res.cloudinary.com/dl1hqxniz/image/upload/v1727458264/";
     Map<String,String> userDetails = (Map<String, String>) request.getAttribute("userDetails");
-    System.out.println("Profile Map:" + userDetails.values());
+
     String imageLink = cloudinaryPrefix + userDetails.get("imagePublicId");
 %>
 

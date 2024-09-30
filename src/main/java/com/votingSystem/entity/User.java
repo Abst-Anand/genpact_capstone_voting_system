@@ -5,32 +5,85 @@ import jakarta.persistence.*;
 
 /* Role 1=Admin, 2=SubAdmin, 3=Voter
 * */
+/**
+ * @author Anand Raj
+ * @version 1.0
+ *
+ * This class is used to represent a table `user` in the database
+ * It will automatically create a table if not exists
+ *
+ * */
 
 
 @Entity
+@Table(name = "users")
 public class User {
 
+    /**
+     * The user's unique identifier.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
+
+    /**
+     * The user's full name.
+     */
     private String name;
 
+    /**
+     * The user's email, also used as of a user identifier.
+     */
     @Column(unique=true)
     private String email;
+
+    /**
+     * The user's profile picture Id which is to identify its iamge url in image database table.
+     */
     private int profilePictureId;
+
+    /**
+     * The user's unique Aadhar Number to verify whether the user is Indian Citizen.
+     */
     @Column(unique=true)
     private String aadharNumber;
+
+    /**
+     * The user's role identifier which is used to get the type of user.
+     */
     private int role;
+
+    /**
+     * The user's password used for user authentication and protection.
+     */
     private String password;
+
+    /**
+     * The user's isAuthorityRevoked used to track the authority of the user.
+     */
     private boolean isAuthorityRevoked;
+
+    /**
+     * The user's createdBy references to self table to track who created a particular user.
+     */
     @Column(nullable = true)
     private int createdBy;
+
+    /**
+     * The user's isApproved to track whether a voter's information is verified.
+     */
     private boolean isApproved;
 
+    /**
+     * The user's default constructor
+     */
     public User(){
         super();
     }
 
+    /**
+     * The user's parameterised constructor without userId and createdBy intended for Voter Registration
+     */
     public User(String name, String email, int profilePictureId,String aadharNumber, int role, String password, boolean isApproved) {
         super();
         this.name = name;
@@ -43,6 +96,9 @@ public class User {
         this.isApproved = isApproved;
     }
 
+    /**
+     * The user's parameterised constructor without userId intended for Election Commissioner and Regional Officer
+     */
     public User(String name, String email, int profilePictureId,String aadharNumber, int role, String password, int createdBy, boolean isApproved) {
         super();
         this.name = name;
@@ -56,6 +112,9 @@ public class User {
         this.isApproved = isApproved;
     }
 
+    /**
+     * The user's parameterised constructor with all User Fields intended for Modification for any field
+     */
     public User(int userId,String name, String email, int profilePictureId, String aadharNumber, int role, String password, int createdBy, boolean isApproved) {
         super();
         this.userId = userId;
@@ -77,10 +136,20 @@ public class User {
         this.userId = userId;
     }
 
+    /**
+     * Gets the user's isApproved.
+     *
+     * @return the user's isApproved
+     */
     public boolean isApproved() {
         return isApproved;
     }
 
+    /**
+     * Sets the user's isApproved.
+     *
+     * @param approved the user's isApproved to set
+     */
     public void setApproved(boolean approved) {
         isApproved = approved;
     }

@@ -5,16 +5,16 @@ import com.votingSystem.entity.User;
 import com.votingSystem.service.CloudinaryService;
 import com.votingSystem.service.ImageService;
 import com.votingSystem.service.UserService;
-import com.votingSystem.utilities.JwtUtil;
+import com.votingSystem.service.JwtService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -26,14 +26,14 @@ public class UserController {
     private final UserService userService;
     private final ImageService imageService;
     private final CloudinaryService cloudinaryService;
-    private final JwtUtil jwtUtil;
+    private final JwtService jwtService;
 
 
-    public UserController(UserService userService, ImageService imageService, CloudinaryService cloudinaryService, JwtUtil jwtUtil) {
+    public UserController(UserService userService, ImageService imageService, CloudinaryService cloudinaryService, JwtService jwtService) {
         this.userService = userService;
         this.imageService = imageService;
         this.cloudinaryService = cloudinaryService;
-        this.jwtUtil = jwtUtil;
+        this.jwtService = jwtService;
     }
 
     @GetMapping("/registration-form")
@@ -51,7 +51,7 @@ public class UserController {
             Model model
     ){
 
-        System.out.println("/userr/voter-registration called");
+        System.out.println("/user/voter-registration called");
         String imagePublicUrlId;
         int role = 3;
 
@@ -60,7 +60,7 @@ public class UserController {
         try {
             imagePublicUrlId = cloudinaryService.uploadImage(profilePic);
         }catch (IOException e){
-            model.addAttribute("error", "Image upload failed. Try again.");
+            model.addAttribute("errorMessage", "Image upload failed. Try again.");
             return "redirect:/user/registration-form";
         }
 
@@ -92,26 +92,27 @@ public class UserController {
 
         System.out.println("/user/login called");
         email = email.toLowerCase();
+
         Optional<User> userOptional = userService.findUserByEmail(email);
 
         if(userOptional.isEmpty()) {
             model.addAttribute("error", "No user exists with given email.");
-            return "redirect:/";
+            return "index";
         }
 
         User user = userOptional.get();
 
         if(user.getRole() == 3 && !user.isApproved()){
             model.addAttribute("error", "Your account has not been approved yet.");
-            return "redirect:/";
+            return "index";
         }
 
         if(!password.equals(user.getPassword())) {
             model.addAttribute("error", "Wrong password.");
-            return "redirect:/";
+            return "index";
         }
 
-        String token = jwtUtil.generateJwtToken(user);
+        String token = jwtService.generateJwtToken(user);
 
         // Create a cookie
         Cookie cookie = new Cookie("token", token);
@@ -143,12 +144,12 @@ public class UserController {
             return "redirect:/";
         }
 
-        if(jwtUtil.isTokenExpired(token)) {
+        if(jwtService.isTokenExpired(token)) {
             model.addAttribute("message", "Please login again.");
             return "redirect:/";
         }
 
-        Map<String, String> userDetails = jwtUtil.extractUserDetails(token);
+        Map<String, String> userDetails = jwtService.extractUserDetails(token);
 
         System.out.println("User details map" + userDetails.keySet());
         System.out.println("User details map" + userDetails.values());
