@@ -1,25 +1,70 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<%
+    String tokenExpired = (String) request.getAttribute("tokenExpired");
+    System.out.println("TokenExpiredInIndexPageStatus: " + tokenExpired);
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        //handle token expiry redirect
+        var tokenExpired = "<%= tokenExpired %>";
+        // console.log("TokenExpired: " + tokenExpired)
+        // console.log("TokenExpired: " + typeof tokenExpired)
+        if (tokenExpired === "true") {
+            window.top.location.href = "/"
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="${pageContext.request.contextPath}/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/globalAlert.css">
 
-
-
     <title>Election Commission Of India</title>
 
 </head>
 <body>
 
+
 <%
     String errorMessage = (String) request.getAttribute("error");
+    String successMessage = (String) request.getAttribute("success");
     System.out.println("error Msg: " + errorMessage);
 %>
+
+<div id="alert"></div>
+<%
+    if (errorMessage != null) {
+%>
+<script type="module">
+    // show db alerts
+    import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
+    console.log("Loaded")
+    showAlert('failed', '<%= errorMessage%>')
+
+</script>
+
+<%
+    }
+%>
+
+<%
+    if (successMessage != null) {
+%>
+<script type="module">
+    // show db alerts
+    import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
+    showAlert('success', '<%= successMessage%>')
+
+</script>
+
+<%
+    }
+%>
+
+
 <!-- Include header here -->
 <header>
     <a href="/">
@@ -28,23 +73,6 @@
 
     <p class="header-text"><img src="${pageContext.request.contextPath}/images/eci-logo.svg" alt="Election Commission of India"></p>
 </header>
-
-<div id="alert"></div>
-<%
-    if (errorMessage != null) {
-%>
-<script type="module">
-    import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
-
-    console.log("Loaded")
-    showAlert('failed', '<%= errorMessage%>')
-</script>
-
-<%
-    }
-%>
-
-
 
 
 <!-- Full-Screen Splash -->
@@ -135,6 +163,20 @@
     }, 3000);  // Start after 3 seconds (when splash fades out)
 </script>
 
+<script type="module">
+    import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
+    window.onload = ()=>{
+        // Check if there's a logout message in session storage
+        const message = sessionStorage.getItem('logoutMessage');
+
+        if(message){
+            showAlert('success', message)
+
+            // Remove the message from session storage after displaying it
+            sessionStorage.removeItem('logoutMessage');
+        }
+    }
+</script>
 
 
 </body>

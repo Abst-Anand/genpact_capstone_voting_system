@@ -45,8 +45,8 @@ export function showAlert(alertType, alertMessage){
     const alertDiv = document.getElementById('alert')
     alertDiv.appendChild(alertBox)
     alertDiv.style.position ='absolute';
-    alertDiv.style.top = `${height*0.21}px`
-    alertDiv.style.left = `${width * 0.73}px`
+    alertDiv.style.top = `${height*0.18}px`
+    alertDiv.style.left = `${width * 0.725}px`
     alertDiv.style.width = `${width * 0.31}px`
     alertDiv.style.zIndex = '1000'
 

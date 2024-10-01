@@ -60,5 +60,15 @@
 <script src="js/adminDashboard.js"></script>
 <script type="module" src="js/loadHeader.js"></script>
 
+<script>
+    window.addEventListener("message", function(event) {
+        if (event.data === "tokenExpired") {
+            // Redirect the parent page to the root ("/")
+            window.location.href = "/";
+        }
+    });
+</script>
+
+
 </body>
 </html>

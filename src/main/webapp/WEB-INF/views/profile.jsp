@@ -17,6 +17,7 @@
     String imageLink = cloudinaryPrefix + userDetails.get("imagePublicId");
 %>
 
+
 <div class="profile-container">
     <!-- Left Section: Profile Picture -->
     <div class="left-section">
@@ -34,10 +35,9 @@
         <div class="profile-details">
             <h2>Profile Details</h2>
 
-            <!-- Logout Button -->
-            <form action="/logout" method="post">
-                <button type="submit" class="logout-button">Logout</button>
-            </form>
+
+            <button id="logout-btn" class="logout-button">Logout</button>
+
 
             <div class="profile-info">
                 <label for="profile_role">Role:</label>
@@ -51,19 +51,19 @@
 
             <div class="profile-info">
                 <label for="profile-name">Name:</label>
-                <p id="profile-name"> <%=userDetails.get("name")%> </p>
+                    <p id="profile-name"><%=userDetails.get("name")%></p>
             </div>
 
-            <div class="profile-info">
-                <label for="profile-email">Email:</label>
-                <p id="profile-email"> <%=userDetails.get("email")%> </p>
-            </div>
+                <div class="profile-info">
+                    <label for="profile-email">Email:</label>
+                    <p id="profile-email"> <%=userDetails.get("email")%> </p>
+                </div>
 
-            <div class="profile-info password-field">
-                <label for="profile-password">Password:</label>
-                <p id="profile-password">********</p>
-                <i class="fas fa-edit" id="edit-password" title="Change Password"></i>
-            </div>
+<!--            <div class="profile-info">-->
+<!--                <label for="profile-password">Password:</label>-->
+<!--                    <p id="profile-password">********</p>-->
+<!--                    <i class="fas fa-edit edit-icon" id="edit-password" title="Change Password" ></i>-->
+<!--            </div>-->
 
             <div class="alert-box success" id="successAlert">
                 <button class="close-btn" onclick="closeAlert('successAlert')">&times;</button>
@@ -98,17 +98,22 @@
         }, 500); // Wait for fade-out transition to complete
     }
 
+    btn = document.getElementById('logout-btn')
+    btn.addEventListener('click', ()=>{
+        // Reset the token cookie on the client side
+        document.cookie = "token=; Max-Age=0; Path=/;"; // Clear the cookie
 
-    document.getElementById("edit-password").addEventListener("click", function() {
-        const newPassword = prompt("Enter new password:");
-        if (newPassword) {
-            document.getElementById("profile-password").textContent = "*".repeat(newPassword.length);
-            showAlert('successAlert');
-        }else{
-            showAlert('failedAlert')
-        }
-    });
+        // Store a flash message in session storage
+        sessionStorage.setItem('logoutMessage', 'Logged Out!');
+
+
+        // Redirect the entire parent window to the root ("/")
+        window.top.location.href = '/'; // Redirect the whole page
+    })
+
 </script>
+
+
 
 
 </body>

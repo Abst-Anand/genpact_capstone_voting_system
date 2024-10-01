@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.Map;
@@ -57,6 +58,7 @@ public class UserController {
 
         email = email.toLowerCase();
 
+        //Upload image to Cloudinary
         try {
             imagePublicUrlId = cloudinaryService.uploadImage(profilePic);
         }catch (IOException e){
@@ -64,10 +66,14 @@ public class UserController {
             return "redirect:/user/registration-form";
         }
 
+        // Save image publicId to image table
         Image image = imageService.saveImage(new Image(imagePublicUrlId));
 
+        //Encrypt Password
+        String encryptedPassword = userService.encryptPassword(password);
+        System.out.println("Encrypted password: " + encryptedPassword);
 
-        User user = new User(name, email, image.getImageId(), aadharNumber, role, password, false);
+        User user = new User(name, email, image.getImageId(), aadharNumber, role, encryptedPassword, false);
 
         boolean signUpStatus = userService.signUp(user);
 
@@ -75,13 +81,13 @@ public class UserController {
         String failureMessage = "A user with email " + user.getEmail() + " already exists.";
 
         if (signUpStatus) {
-            model.addAttribute("successMessage", successMessage);
+            model.addAttribute("success", successMessage);
         }
         else{
-            model.addAttribute("failureMessage", failureMessage);
+            model.addAttribute("error", failureMessage);
         }
 
-        return "redirect:/";
+        return "index";
     }
 
     @PostMapping("/login")
@@ -91,6 +97,7 @@ public class UserController {
                         Model model) {
 
         System.out.println("/user/login called");
+
         email = email.toLowerCase();
 
         Optional<User> userOptional = userService.findUserByEmail(email);
@@ -107,7 +114,7 @@ public class UserController {
             return "index";
         }
 
-        if(!password.equals(user.getPassword())) {
+        if(!userService.verifyPassword(password, user.getPassword())) {
             model.addAttribute("error", "Wrong password.");
             return "index";
         }
@@ -118,7 +125,7 @@ public class UserController {
         Cookie cookie = new Cookie("token", token);
         cookie.setHttpOnly(true); // Helps prevent XSS attacks
         cookie.setPath("/"); // Accessible to the entire application
-        cookie.setMaxAge(60 * 60); // Set cookie expiration (1 hour)
+        cookie.setMaxAge(60 * 60); // Set cookie expiration (10 sec)
 
         // Add the cookie to the response
         response.addCookie(cookie);
@@ -140,19 +147,19 @@ public class UserController {
     @GetMapping("/profile")
     public String getUserProfile(@CookieValue(value = "token", defaultValue = "NA") String token, Model model) {
 
-        if(token.equals("NA")){
-            return "redirect:/";
+        if (token.equals("NA") || jwtService.isTokenExpired(token)) {
+            System.out.println("Expired token");
+            // Pass a flag to the front-end to trigger the JS-based redirection
+            model.addAttribute("tokenExpired", "true");
+            return "index";  // This loads a profile page containing the redirect script
         }
 
-        if(jwtService.isTokenExpired(token)) {
-            model.addAttribute("message", "Please login again.");
-            return "redirect:/";
-        }
+        model.addAttribute("tokenExpired", "false");
 
         Map<String, String> userDetails = jwtService.extractUserDetails(token);
 
-        System.out.println("User details map" + userDetails.keySet());
-        System.out.println("User details map" + userDetails.values());
+//        System.out.println("User details map" + userDetails.keySet());
+//        System.out.println("User details map" + userDetails.values());
 
         int imageId = Integer.parseInt(userDetails.get("profilePicId"));
         int roleId = Integer.parseInt(userDetails.get("roleId"));
@@ -164,13 +171,14 @@ public class UserController {
         userDetails.put("imagePublicId", imagePublicId);
         userDetails.put("role", role);
 
-        System.out.println("User details map" + userDetails.keySet());
-        System.out.println("User details map" + userDetails.values());
+//        System.out.println("User details map" + userDetails.keySet());
+//        System.out.println("User details map" + userDetails.values());
 
         model.addAttribute("userDetails",userDetails);
 
         return "profile";
     }
+
 
 
     private String getRoleName(int roleId){

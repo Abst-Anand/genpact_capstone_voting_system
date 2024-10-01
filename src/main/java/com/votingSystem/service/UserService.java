@@ -3,6 +3,7 @@ package com.votingSystem.service;
 import com.votingSystem.entity.User;
 import com.votingSystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,7 +41,16 @@ public class UserService {
         User newUser = userRepository.save(user);
 
         return true;
+    }
 
+    public String encryptPassword(String plainPassword) {
+        String salt = BCrypt.gensalt();
+        System.out.println("Salt: " + salt + " Len:" +salt.length());
+        return BCrypt.hashpw(plainPassword, salt);
+    }
+
+    public boolean verifyPassword(String plainPassword, String encryptedPassword) {
+        return BCrypt.checkpw(plainPassword, encryptedPassword);
     }
 
 

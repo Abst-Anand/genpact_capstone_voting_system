@@ -93,7 +93,7 @@ h2{
 #edit-password {
     font-size: 1.2rem;
     color: #007bff;
-    cursor: pointer;
+    cursor: not-allowed;
     position: absolute;
     right: 10px;
     top: 2px;
