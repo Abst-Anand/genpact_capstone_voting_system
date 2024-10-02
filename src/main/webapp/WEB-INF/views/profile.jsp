@@ -101,7 +101,7 @@
     btn = document.getElementById('logout-btn')
     btn.addEventListener('click', ()=>{
         // Reset the token cookie on the client side
-        document.cookie = "token=; Max-Age=0; Path=/;"; // Clear the cookie
+        document.cookie = "token=NA; Max-Age=0; Path=/;"; // Clear the cookie
 
         // Store a flash message in session storage
         sessionStorage.setItem('logoutMessage', 'Logged Out!');

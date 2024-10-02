@@ -125,7 +125,7 @@ public class UserController {
         Cookie cookie = new Cookie("token", token);
         cookie.setHttpOnly(true); // Helps prevent XSS attacks
         cookie.setPath("/"); // Accessible to the entire application
-        cookie.setMaxAge(60 * 60); // Set cookie expiration (10 sec)
+        cookie.setMaxAge(60 * 60); // Set cookie expiration (1 hour)
 
         // Add the cookie to the response
         response.addCookie(cookie);
@@ -178,6 +178,7 @@ public class UserController {
 
         return "profile";
     }
+
 
 
 

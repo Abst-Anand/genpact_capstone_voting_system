@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -33,5 +34,16 @@ public class AdminController {
         model.addAttribute("allSubAdmins", allSubAdmins);
 
         return "admin_consolidated_info"; // Maps to /WEB-INF/views/admin_consolidated_info.jsp
+    }
+
+    @GetMapping("/manageAuthority")
+    public String manageAuthority(@RequestParam int admin, @RequestParam String subAdmin) {
+
+        System.out.println("admin: " + admin);
+        System.out.println("subAdmin: " + subAdmin);
+
+
+
+        return "admin_dashboard.html";
     }
 }

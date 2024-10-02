@@ -94,7 +94,7 @@
                 <td class="status-inactive">Inactive</td>
                 <td class="action-icons">
 
-                    <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/manageAuthority?admin=18&subAdmin=<%=user.getUserId() %>')">
+                    <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/admin/manageAuthority?admin=18&subAdmin=<%=user.getUserId() %>')">
                         <i class="fas fa-check-circle"></i>
                     </button>
                 </td>
@@ -103,7 +103,7 @@
             %>
                 <td class="status-active">Active</td>
                 <td class="action-icons">
-                    <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/manageAuthority?admin=45&subAdmin=<%=user.getUserId() %>')">
+                    <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/admin/manageAuthority?admin=45&subAdmin=<%=user.getUserId() %>')">
                         <i class="fas fa-times-circle"></i>
                     </button>
                 </td>
