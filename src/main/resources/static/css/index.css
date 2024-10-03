@@ -6,6 +6,8 @@
 body {
     font-size: 16px;
     transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+	/*Adds a transition effect for changes in background color, text color, and font size (smooth transitions over 0.3 seconds).*/
+	
 }
 header {
     position: relative;
@@ -32,7 +34,10 @@ header {
 
 
 /* Full-Screen Splash */
-#splash {
+
+/* #splash is a full-screen section (used as a loading screen).*/
+ #splash{
+	
     position: absolute;
     top: 0;
     left: 0;

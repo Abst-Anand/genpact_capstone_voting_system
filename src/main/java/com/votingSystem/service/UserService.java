@@ -42,6 +42,12 @@ public class UserService {
         return true;
 
     }
+    
+    public int revokeSubAdminAuthority (int subAdminId) {
+    	
+    	
+    	return 0;
+    }
 
 
 

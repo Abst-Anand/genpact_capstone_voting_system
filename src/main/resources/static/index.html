@@ -25,11 +25,17 @@
   <img src="images/namaste.gif" alt="Namaskaram GIF">
   <h1>नमस्कारम्</h1>
 </div>
+<div id="splash"> 
+	<!--creates a container section, often used for a splash screen or any important 
+		content at the beginning of the website, and the id="splash" makes it easy to style
+		 or manipulate using CSS or JavaScript. -->
+	
 
 <!-- Main Content -->
 <div class="content">
   <div class="left-section">
     <div class="carousel">
+		<!--a slideshow (carousel) of images -->
       <!-- Carousel Images -->
       <img width="2544" height="1272" id="carousel-image-1" src="images/c1tr.jpg" alt="Indian Culture 1" class="show">
       <img width="2544" height="1272" id="carousel-image-2" src="images/c2-transformed.jpeg" alt="Indian Culture 2">
@@ -79,6 +85,7 @@
     document.getElementById('carousel-image-5'),
     document.getElementById('carousel-image-6'),
   ];
+  //creating an array called images, which holds a collection of HTML image elements from the document -->
 
   let currentIndex = 0;
 
@@ -93,6 +100,8 @@
   setTimeout(() => {
     setInterval(showNextImage, 3000);  // Switch image every 3 seconds
   }, 3000);  // Start after 3 seconds (when splash fades out)
+  //  Wait 3 seconds (for splash screen to fade).
+ // After that, every 3 seconds, switch to the next image in the slideshow.
 </script>
 
 

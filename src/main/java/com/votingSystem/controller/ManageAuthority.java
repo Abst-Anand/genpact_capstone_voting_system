@@ -15,15 +15,12 @@ import java.net.URI;
 public class ManageAuthority {
 
     @GetMapping
-    public String manageAuthority(@RequestParam int admin, @RequestParam String subAdmin) {
+    public String manageAuthority(@RequestParam int adminId, @RequestParam int subAdminId) {
 
-        System.out.println("admin: " + admin);
-        System.out.println("subAdmin: " + subAdmin);
-
-//        return ResponseEntity.status(HttpStatus.FOUND)
-//                .location(URI.create("/admin_dashboard.html"))
-//                .build();
-
+        System.out.println("admin: " + adminId);
+        System.out.println("subAdmin: " + subAdminId);
+          
+ 
         return "admin_dashboard.html";
     }
 }
