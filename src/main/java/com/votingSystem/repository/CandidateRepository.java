@@ -2,7 +2,6 @@ package com.votingSystem.repository;
 
 import com.votingSystem.entity.Candidate;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.lang.NonNullApi;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
