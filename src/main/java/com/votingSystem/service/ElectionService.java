@@ -10,8 +10,11 @@ import java.util.List;
 @Service
 public class ElectionService {
 
-    @Autowired
-    private ElectionRepository electionRepository;
+    private final ElectionRepository electionRepository;
+
+    public ElectionService(ElectionRepository electionRepository) {
+        this.electionRepository = electionRepository;
+    }
 
     public List<Election> getAllElections() {
         return electionRepository.findAll();

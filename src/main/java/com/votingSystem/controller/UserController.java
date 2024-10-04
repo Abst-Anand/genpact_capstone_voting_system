@@ -123,7 +123,7 @@ public class UserController {
 
         // Create a cookie
         Cookie cookie = new Cookie("token", token);
-        cookie.setHttpOnly(true); // Helps prevent XSS attacks
+//        cookie.setHttpOnly(true); // Helps prevent XSS attacks
         cookie.setPath("/"); // Accessible to the entire application
         cookie.setMaxAge(60 * 60); // Set cookie expiration (1 hour)
 
