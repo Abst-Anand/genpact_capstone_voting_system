@@ -12,4 +12,7 @@ public interface UserDao {
 	
 	public int revokeAuthority(int subAdminId) throws SerialException, IOException, SQLException;
 
+	public int isApproved(int voterId) throws SerialException, IOException, SQLException;
+	
+	
 }

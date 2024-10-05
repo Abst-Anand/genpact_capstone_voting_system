@@ -33,10 +33,22 @@ public class UserDaoImpl implements UserDao {
 	               "ELSE 0 " +
 	               "END " +
 	               "WHERE user_id = ?";
-
-//		String query = "UPDATE users SET is_authority_revoked = not is_authority_revoked where user_id = ?";
-
 	   int result =	jdbcTemplate.update(query,subAdminId);
+
+
+		return result;
+	}
+	@Override
+	public int isApproved(int voterId) throws SerialException, IOException, SQLException  {
+		
+		
+		String query = "UPDATE users " +
+	               "SET is_approved = CASE " +
+	               "WHEN is_approved = 0 THEN 1 " +
+	               "ELSE 0 " +
+	               "END " +
+	               "WHERE user_id = ?";
+	   int result =	jdbcTemplate.update(query,voterId);
 
 
 		return result;

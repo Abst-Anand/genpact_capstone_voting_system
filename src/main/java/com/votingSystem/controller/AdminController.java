@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.rowset.serial.SerialException;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,10 +28,10 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+    
 
 	@Autowired
-    UserDaoImpl userDaoImpl;
-    
+	UserDaoImpl u_UserImpl;
 
     @GetMapping("/info")
     public String showAdminConsolidatedInfo(Model model) {
@@ -46,20 +47,21 @@ public class AdminController {
     }
 
     @GetMapping("/manageAuthority")
-    public String manageAuthority(@RequestParam int subAdmin, RedirectAttributes attributes,Model model)
-    	throws IOException, SQLException {
+    public String manageAuthority(@RequestParam int admin, @RequestParam int subAdmin, RedirectAttributes attributes,Model model)
+    	throws IOException, SerialException, SQLException {
 
+        System.out.println("admin: " + admin);
         System.out.println("subAdmin: " + subAdmin);
         
-        int result = userDaoImpl.revokeAuthority(subAdmin);
-
+        int result = u_UserImpl.revokeAuthority(subAdmin);
         List<Election> allElectionsList = electionService.getAllElections();
         List<User> allSubAdmins = userService.findSubAdmins();
 
         model.addAttribute("allElections", allElectionsList);
         model.addAttribute("allSubAdmins", allSubAdmins);
-
-
+        
+        attributes.addFlashAttribute("adminId", admin);
+     
         attributes.addFlashAttribute("updateResult", result > 0 ? "Success" : "Failure");
         
         return "redirect:/admin_dashboard.html";

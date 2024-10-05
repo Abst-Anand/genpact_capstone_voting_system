@@ -21,6 +21,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User save(User user);
 
     List<User> findUserByRoleEquals(int role);
+    
+    List<User> findUserByRoleEqualsAndIsApprovedIsFalse(int role); // 1usage new
+    
+    
 
     List<User> findUserByRoleEqualsAndIsApprovedIsFalse(int role);
 

@@ -1,0 +1,56 @@
+ 
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	height: 120vh;
+}
+
+/* Dashboard body styling with gradient background */
+.dashboard-body {
+	background: linear-gradient(to bottom, #FF9933, white, #138808);
+	/* Saffron, White, Green */
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 20px;
+}
+
+
+ 
+.confirmation-dialog {
+    background: linear-gradient(to bottom, #FF9933, white, #138808);
+    padding: 2px;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+    /* Centering the dialog */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.confirmation-buttons {
+	margin-top: 20px;
+}
+
+.btn {
+	background-color: blue;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	margin: 5px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.btn:hover {
+	background-color: darkblue;
+}
