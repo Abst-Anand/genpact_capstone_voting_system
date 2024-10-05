@@ -64,7 +64,7 @@
 %>
 
 
-<form action="/candidate/register" method="post" enctype="multipart/form-data">
+<form action="/candidate/register" method="post" enctype="multipart/form-data" onsubmit="return validateFormBeforeSubmit()">
 
     <!-- Name -->
     <label for="name">Full Name:</label>
@@ -96,6 +96,7 @@
 
     <!-- Created By -->
     <label for="createdBy">Created By:</label>
+    <input type="text"  placeholder="YB Jais"  style="cursor: not-allowed">
     <input type="text" id="createdBy" name="createdBy" value=4 placeholder="YB Jais"  style="cursor: not-allowed">
 
 
@@ -108,7 +109,91 @@
 
 </form>
 
+<!-- Alert Messages -->
+<div class="alert-position">
+    <div class="alert-box failed" id="failedAlert" style="display:none;">
+        <button class="close-btn" onclick="closeAlert('failedAlert')">&times;</button>
+        <p id="errorMessage" style="font-weight: bold"></p>
+    </div>
+    <div class="alert-box success" id="successAlert" style="display:none;">
+        <button class="close-btn" onclick="closeAlert('successAlert')">&times;</button>
+        <p><strong>Success!</strong> Your form has been submitted successfully.</p>
+    </div>
+</div>
+
 <script>
+
+    function validateFormBeforeSubmit(){
+        const name = document.getElementById('name').value
+        const description = document.getElementById('description').value
+        const aadharNumber = document.getElementById('aadharNumber').value
+        const profilePic = document.getElementById('profilePic')
+        const partyName = document.getElementById('partyName').value
+        const partyLogo = document.getElementById('partyLogo')
+
+        let errorMessage = ''
+
+        // check name
+        if(!name){
+            errorMessage += '<br>Full Name is required.'
+        }else if(name.length < 3) {
+            errorMessage += '<br>Full Name should have minimum 3 letters.'
+        }
+
+        // check description
+        if(!description){
+            errorMessage += '<br>Candidate Description is required.'
+        }else if(description.length < 6) {
+            errorMessage += '<br>Candidate Description should have minimum 6 letters.'
+        }
+
+        // check aadharNumber
+        if(!aadharNumber){
+            errorMessage += '<br>Aadhar Number is required.'
+        }else if(aadharNumber.length != 14) {
+            errorMessage += '<br>Aadhaar Number must be of 12 digits.'
+        }
+
+        // check profilePic
+        if(!profilePic.files || profilePic.files.length === 0){
+            errorMessage += '<br>Profile Picture is required.'
+        }
+
+        // check partyName
+        if(!partyName){
+            errorMessage += '<br>Party Name is required.'
+        }else if(partyName.length < 3) {
+            errorMessage += '<br>Party Name should have minimum 3 letters.'
+        }
+
+        // check partyLogo
+        if(!partyLogo.files || partyLogo.files.length === 0){
+            errorMessage += '<br>Party Logo is required.'
+        }
+
+
+        if(errorMessage){
+            console.log('err:' + errorMessage)
+            document.getElementById('errorMessage').innerHTML = errorMessage;
+            document.getElementById('failedAlert').style.display = 'flex';
+            return false
+        }
+
+        // showAlert('success','check')
+
+        console.log('done')
+        // Proceed with form submission
+        submitButton.innerHTML = 'Submitting... <div class="spinner"></div>';
+        submitButton.disabled = true;
+        document.getElementById('failedAlert').style.display = 'none';  // Hide error alert if no error
+        return true;
+
+
+
+
+    }
+
+
 
     function addSpaces(elementId){
 
@@ -120,15 +205,9 @@
 
     }
 
-
 </script>
 
-
-
 </body>
-
-
-
 
 
 </html>

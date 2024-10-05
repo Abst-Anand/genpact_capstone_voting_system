@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Service class for handling image uploads to Cloudinary.
@@ -94,8 +93,7 @@ public class CloudinaryService {
         }
 
         // Create a temporary file in the custom directory
-        File tempFile = File.createTempFile("upload-",
-                Objects.requireNonNull(image.getOriginalFilename()), tempStoreDirectory);
+        File tempFile = File.createTempFile("upload-", image.getOriginalFilename(), tempStoreDirectory);
 
         // Write the image data to the temporary file
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
