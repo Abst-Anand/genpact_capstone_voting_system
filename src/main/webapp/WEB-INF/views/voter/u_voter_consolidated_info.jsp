@@ -13,14 +13,14 @@
 
 </head>
 <body>
-<%
-    List<Election> allElections = (List<Election>) request.getAttribute("allElections");
-    List<User> allSubAdmins = (List<User>) request.getAttribute("allSubAdmins");
+
+<%    
+   List<User> allVoters = (List<User>) request.getAttribute("allVoters");
 %>
 
 
 
-<h2 style="color: black">All Regional Officers Information</h2>
+<h2 style="color: black">All Pending Voters Information</h2>
 
 
 <table>
@@ -29,53 +29,50 @@
         <th>Id</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Aadhar Number</th>
-        <th>Authority</th>
-        <th>Manage Authority</th>
+        <th>Aadhar Number</th>        
+        <th>Disapprove Voter</th>
+        <th>Approve Voter</th>
+        
     </tr>
     </thead>
     <tbody>
     <%
-        if (!allSubAdmins.isEmpty()){
-            for(User user : allSubAdmins){
+     
+        if (!allVoters.isEmpty()){
+            for(User user : allVoters){
 
     %>
     <tr>
+    
         <td> <%=user.getUserId() %> </td>
         <td> <%=user.getName() %> </td>
         <td> <%=user.getEmail() %> </td>
         <td> <%=user.getAadharNumber() %> </td>
 
-        <%
-            if(user.isAuthorityRevoked()){
-
-        %>
-        <td class="status-inactive">Inactive</td>
+      
+         
         <td class="action-icons">
-
-            <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/admin/manageAuthority?admin=18&subAdmin=<%=user.getUserId() %>')">
-                <i class="fas fa-check-circle"></i>
-            </button>
-        </td>
-        <%
-        }else{
-        %>
-        <td class="status-active">Active</td>
-        <td class="action-icons">
-            <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/admin/manageAuthority?admin=45&subAdmin=<%=user.getUserId() %>')">
+            <button class="icon-button icon-revoke" title="Move to Rejection list" onclick="confirmAction('/subAdmin/manageVoters?subAdminId=45&voterId=<%=user.getUserId() %>')">
                 <i class="fas fa-times-circle"></i>
             </button>
         </td>
+        
+      
+          
+        <td class="action-icons">
 
+            <button class="icon-button icon-authorize" title="Approve Now" onclick="confirmAction('/subAdmin/manageVoters?subAdminId=18&voterId=<%=user.getUserId() %>')">
+                <i class="fas fa-check-circle"></i>
+            </button>
+        </td>
+       
 
     </tr>
 
-    <%}
-    }
-    }else {
-    %>
-    <tr> -- No Sub Admins -- </tr>
+    
+    
     <%
+        }
         }
     %>
 

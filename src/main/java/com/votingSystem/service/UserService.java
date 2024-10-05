@@ -26,7 +26,13 @@ public class UserService {
     public List<User> findSubAdmins() {
         return userRepository.findUserByRoleEquals(2);
     }
-
+    public List<User> findVoters() {
+        return userRepository.findUserByRoleEquals(3);
+    }
+    
+    public List<User>findPendingVoters(){
+    	return userRepository.findUserByRoleEqualsAndIsApprovedIsFalse(3);
+    }
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
