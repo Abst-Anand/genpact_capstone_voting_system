@@ -128,6 +128,18 @@ public class User {
         this.isApproved = isApproved;
     }
 
+
+    //this much info will be available to frontend after login
+    public User(int userId,String name, String email, int profilePictureId, String aadharNumber, int role) {
+        super();
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.profilePictureId = profilePictureId;
+        this.aadharNumber = aadharNumber;
+        this.role = role;
+    }
+
     public int getUserId() {
         return userId;
     }

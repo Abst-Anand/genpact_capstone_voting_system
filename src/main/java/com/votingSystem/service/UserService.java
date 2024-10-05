@@ -31,6 +31,10 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public List<User> findPendingVoters() {
+        return userRepository.findUserByRoleEqualsAndIsApprovedIsFalse(3);
+    }
+
     public boolean signUp(User user) {
 
         Optional<User> existingUser = findUserByEmail(user.getEmail());

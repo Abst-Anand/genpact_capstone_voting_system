@@ -8,7 +8,7 @@ import javax.sql.rowset.serial.SerialException;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface User {
+public interface UserDao {
 	
 	public int revokeAuthority(int subAdminId) throws SerialException, IOException, SQLException;
 

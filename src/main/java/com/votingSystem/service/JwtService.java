@@ -4,6 +4,8 @@ import com.votingSystem.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +23,16 @@ import java.util.Map;
 public class JwtService {
 
     private final Environment env;
+    private final HttpServletRequest request;
 
     /**
      * Constructor that initializes JwtService with environment variables.
      *
      * @param env Environment object to access properties like secret keys.
      */
-    public JwtService(Environment env) {
+    public JwtService(Environment env, HttpServletRequest request) {
         this.env = env;
+        this.request = request;
     }
 
     /**
@@ -52,6 +56,7 @@ public class JwtService {
                 .claim("userId", user.getUserId())
                 .claim("name", user.getName())
                 .claim("roleId", user.getRole())
+                .claim("aadharNumber", user.getAadharNumber())
                 .claim("profilePicId", user.getProfilePictureId())
                 .setIssuedAt(issuedAt)
                 .setExpiration(expirationAt)
@@ -98,9 +103,44 @@ public class JwtService {
         userDetails.put("userId", claims.get("userId").toString());
         userDetails.put("name", (String) claims.get("name"));
         userDetails.put("email", claims.getSubject());  // Email is the subject
+        userDetails.put("aadharNumber", (String) claims.get("aadharNumber"));
         userDetails.put("roleId", claims.get("roleId").toString());
         userDetails.put("profilePicId", claims.get("profilePicId").toString());
 
         return userDetails;
+    }
+
+
+    public User getCurrentUser() {
+
+        String token = getUserTokenFromCookie();
+
+        Claims claims = extractAllClaims(token);
+
+        int id = (int) claims.get("userId");
+        String name = (String) claims.get("name");
+        String email = (String) claims.get("email");
+        String aadharNumber = (String) claims.get("aadharNumber");
+        int profilePicId = (int) claims.get("profilePicId");
+        int roleId = (int) claims.get("roleId");
+
+        User user = new User(id, name, email, profilePicId, aadharNumber, roleId);
+
+        return user;
+    }
+
+    private String getUserTokenFromCookie() {
+
+        Cookie[] cookies = request.getCookies();
+
+        String token = null;
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("token")) {
+                token =  cookie.getValue();
+            }
+        }
+
+        return token;
     }
 }

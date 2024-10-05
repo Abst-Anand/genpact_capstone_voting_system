@@ -60,7 +60,7 @@ input[type="file"] {
     border: 1px solid #ccc;
 }
 select,
-input[type="date"] {
+input[type="datetime-local"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;

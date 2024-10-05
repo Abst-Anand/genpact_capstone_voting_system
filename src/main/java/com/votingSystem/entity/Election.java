@@ -1,9 +1,6 @@
 package com.votingSystem.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -13,8 +10,13 @@ public class Election {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int electionId;
+
+    @Column(length = 60)
     private String electionName;
+
+    @Column(length = 32)
     private String electionType;
+
     private Date startDate;
     private Date endDate;
     private int assingedTo;
