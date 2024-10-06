@@ -22,11 +22,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findUserByRoleEquals(int role);
     
-    List<User> findUserByRoleEqualsAndIsApprovedIsFalse(int role); // 1usage new
+    List<User> findUserByRoleEqualsAndIsApprovedIsFalse(int role);
+
     
     
 
-    List<User> findUserByRoleEqualsAndIsApprovedIsFalse(int role);
+    //List<User> findUserByRoleEqualsAndIsApprovedIsFalse(int role);
 
 //    @Query("UPDATE users SET is_authority_revoked = not is_authority_revoked where user_id = ?")
 //    public int revokeAuthority(int subAdminId) throws SerialException, IOException, SQLException;
