@@ -46,6 +46,8 @@ public class AdminController {
         return "admin_consolidated_info"; // Maps to /WEB-INF/views/admin_consolidated_info.jsp
     }
 
+
+
     @GetMapping("/manageAuthority")
     public String manageAuthority(@RequestParam int admin, @RequestParam int subAdmin, RedirectAttributes attributes,Model model)
     	throws IOException, SerialException, SQLException {

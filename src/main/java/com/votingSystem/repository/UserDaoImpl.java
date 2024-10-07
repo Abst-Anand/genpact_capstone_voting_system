@@ -38,6 +38,7 @@ public class UserDaoImpl implements UserDao {
 
 		return result;
 	}
+
 	@Override
 	public int isApproved(int voterId) throws SerialException, IOException, SQLException  {
 		

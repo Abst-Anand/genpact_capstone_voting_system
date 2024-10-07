@@ -3,7 +3,6 @@ package com.votingSystem.controller;
 import com.votingSystem.entity.Election;
 import com.votingSystem.entity.User;
 import com.votingSystem.repository.UserDaoImpl;
-import com.votingSystem.service.ElectionService;
 import com.votingSystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +17,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-
-import javax.sql.rowset.serial.SerialException;
 
 @Controller
 @RequestMapping("/subAdmin")
@@ -37,7 +34,6 @@ public class SubAdminController {
 	      
 	        List<User> allVoters = userService.findPendingVoters();
 
-	        
 	        model.addAttribute("allVoters", allVoters);
 
 	        return "voter/u_voter_consolidated_info"; // Maps to /WEB-INF/views/voter/u_voter_consolidated_info.jsp
@@ -46,7 +42,7 @@ public class SubAdminController {
 
 	    @GetMapping("/manageVoters")
 	    public String manageAuthority(@RequestParam int subAdminId, @RequestParam int voterId, RedirectAttributes attributes,Model model)
-	    	throws IOException, SerialException, SQLException {
+	    	throws IOException, SQLException {
 
 	        System.out.println("admin: " + subAdminId);
 	        System.out.println("subAdmin: " + voterId);
@@ -55,11 +51,8 @@ public class SubAdminController {
 	        
 	        List<User> allVoters = userService.findPendingVoters();
 
-	       
 	        model.addAttribute("allVoters", allVoters);
-	        
-	         
-	     
+
 	        attributes.addFlashAttribute("updateResult", result > 0 ? "Success" : "Failure");
 	        
 	        return "redirect:/s_subAdmin_dashboard.html";
