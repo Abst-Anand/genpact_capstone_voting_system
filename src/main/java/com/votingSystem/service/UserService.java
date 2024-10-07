@@ -31,7 +31,7 @@ public class UserService {
         return userRepository.findUserByRoleEquals(3);
     }
     
-    public List<User>findPendingVoters1(){
+    public List<User>findPendingVoters(){
     	return userRepository.findUserByRoleEqualsAndIsApprovedIsFalse(3);
     }
 

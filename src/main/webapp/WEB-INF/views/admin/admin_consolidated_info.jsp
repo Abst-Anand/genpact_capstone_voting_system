@@ -28,7 +28,7 @@
         <th>Id</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Aadhar Number</th>
+        <th>Aadhaar Number</th>
         <th>Authority</th>
         <th>Manage Authority</th>
     </tr>

@@ -43,16 +43,15 @@ public class AdminController {
         model.addAttribute("allElections", allElectionsList);
         model.addAttribute("allSubAdmins", allSubAdmins);
 
-        return "admin_consolidated_info"; // Maps to /WEB-INF/views/admin_consolidated_info.jsp
+        return "admin/admin_consolidated_info"; // Maps to /WEB-INF/views/admin_consolidated_info.jsp
     }
 
 
 
     @GetMapping("/manageAuthority")
-    public String manageAuthority(@RequestParam int admin, @RequestParam int subAdmin, RedirectAttributes attributes,Model model)
-    	throws IOException, SerialException, SQLException {
+    public String manageAuthority(@RequestParam int subAdmin, RedirectAttributes attributes,Model model)
+    	throws IOException, SQLException {
 
-        System.out.println("admin: " + admin);
         System.out.println("subAdmin: " + subAdmin);
         
         int result = u_UserImpl.revokeAuthority(subAdmin);
@@ -61,8 +60,6 @@ public class AdminController {
 
         model.addAttribute("allElections", allElectionsList);
         model.addAttribute("allSubAdmins", allSubAdmins);
-        
-        attributes.addFlashAttribute("adminId", admin);
      
         attributes.addFlashAttribute("updateResult", result > 0 ? "Success" : "Failure");
         

@@ -31,6 +31,11 @@ public class CandidateController {
         this.cloudinaryService = cloudinaryService;
     }
 
+
+
+
+
+
     @GetMapping("/registration-form")
     public String registrationForm() {
         return "candidate/registration";

@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.votingSystem.entity.Election" %>
+<%@ page import="com.votingSystem.entity.Candidate" %>
 <%@ page import="com.votingSystem.entity.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
@@ -15,7 +16,8 @@
 <body>
 <%
     List<Election> allElections = (List<Election>) request.getAttribute("allElections");
-    List<User> allCandidates = (List<User>) request.getAttribute("allCandidates");
+    List<Candidate> allCandidates = (List<Candidate>) request.getAttribute("allCandidates");
+    User currentUser = (User) request.getAttribute("currentUser");
 %>
 
 
@@ -69,8 +71,8 @@
     <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Email</th>
-        <th>Aadhar Number</th>
+        <th>Aadhaar Number</th>
+        <th>Party Name</th>
         <th>Authority</th>
         <th>Manage Authority</th>
     </tr>
@@ -78,23 +80,23 @@
     <tbody>
     <%
         if (!allCandidates.isEmpty()){
-            for(User user : allCandidates){
+            for(Candidate candidate : allCandidates){
 
          %>
     <tr>
-        <td> <%=user.getUserId() %> </td>
-        <td> <%=user.getName() %> </td>
-        <td> <%=user.getEmail() %> </td>
-        <td> <%=user.getAadharNumber() %> </td>
+        <td> <%=candidate.getCandidateId() %> </td>
+        <td> <%=candidate.getCandidateName()%> </td>
+        <td> <%=candidate.getAadharNumber() %> </td>
+        <td> <%=candidate.getPartyName() %> </td>
 
         <%
-            if(user.isAuthorityRevoked()){
+            if(candidate.isCandidatureRevoked()){
 
         %>
                 <td class="status-inactive">Inactive</td>
                 <td class="action-icons">
 
-                    <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/subadmin/manageAuthority?subadmin=10&candidates=<%=user.getUserId() %>')">
+                    <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/subadmin/manageAuthority?subadmin=<%=currentUser.getUserId()%>&candidates=<%=candidate.getCandidateId()%>')">
                         <i class="fas fa-check-circle"></i>
                     </button>
                 </td>
@@ -103,7 +105,7 @@
             %>
                 <td class="status-active">Active</td>
                 <td class="action-icons">
-                    <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/subadmin/manageAuthority?subadmin=40&candidates=<%=user.getUserId() %>')">
+                    <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/subadmin/manageAuthority?subadmin=<%=currentUser.getUserId()%>&candidates=<%=candidate.getCandidateId() %>')">
                         <i class="fas fa-times-circle"></i>
                     </button>
                 </td>
