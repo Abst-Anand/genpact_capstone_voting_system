@@ -6,16 +6,16 @@
 <head>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css"> <!-- Link to external CSS file -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- FontAwesome for icons -->
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> --> <!-- FontAwesome for icons -->
 </head>
 <body>
 
-<%
+<!-- <%
     String cloudinaryPrefix = "https://res.cloudinary.com/dl1hqxniz/image/upload/v1727458264/";
     Map<String,String> userDetails = (Map<String, String>) request.getAttribute("userDetails");
 
     String imageLink = cloudinaryPrefix + userDetails.get("imagePublicId");
-%>
+%> -->
 
 
 <div class="profile-container">

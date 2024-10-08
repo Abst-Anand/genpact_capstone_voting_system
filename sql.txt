@@ -69,5 +69,18 @@ INSERT INTO user (aadhar_number, created_by, email, is_authority_revoked, name, 
 ('123456781253', 1, 'manish.sahni@gmail.com', 0, 'Manish Sahni', '123', 1, 3, 0),
 ('123456781254', 1, 'anita.kulkarni@gmail.com', 0, 'Anita Kulkarni', '123', 1, 3, 0);
 
+rejected_voters table -- 
+
+CREATE TABLE rejected_voters (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    aadhar_number INT NOT NULL,
+    rejection_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    rejection_reason VARCHAR(255),
+    approver_id INT,
+    FOREIGN KEY (approver_id) REFERENCES users(user_id) -- Assuming there's an 'approvers' table with 'id' as a primary key
+)
+
 
 
