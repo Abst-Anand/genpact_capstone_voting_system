@@ -27,4 +27,16 @@ public class ElectionService {
     public Election findElectionById(int id) {
         return electionRepository.findById(id);
     }
+
+    public List<Election> getAllLokSabhaElections() {
+        return electionRepository.findElectionsByElectionTypeEquals("Lok Sabha");
+    }
+
+    public List<Election> getAllRajyaSabhaElections() {
+        return electionRepository.findElectionsByElectionTypeEquals("Rajya Sabha");
+    }
+
+    public List<Election> getAllMunicipalElections() {
+        return electionRepository.findElectionsByElectionTypeEquals("Municipal Corporation");
+    }
 }

@@ -97,7 +97,7 @@
     <!-- Created By -->
     <label for="createdBy">Created By:</label>
     <input type="text"  placeholder="YB Jais"  style="cursor: not-allowed">
-    <input type="text" id="createdBy" name="createdBy" value=4 placeholder="YB Jais"  style="cursor: not-allowed">
+    <input type="hidden" id="createdBy" name="createdBy" value=4 placeholder="YB Jais"  style="cursor: not-allowed">
 
 
     <!-- Submit Button -->

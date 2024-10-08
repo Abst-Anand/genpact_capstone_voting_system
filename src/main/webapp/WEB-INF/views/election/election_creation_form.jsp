@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.votingSystem.entity.User" %><%--
+<%@ page import="com.votingSystem.entity.User" %>
+<%--
   Created by IntelliJ IDEA.
   User: araaz
   Date: 05-10-2024

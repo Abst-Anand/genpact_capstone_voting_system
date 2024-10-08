@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "elections")
 public class Election {
 
     @Id
@@ -19,31 +20,31 @@ public class Election {
 
     private Date startDate;
     private Date endDate;
-    private int assingedTo;
+    private int assignedTo;
     private int createdBy;
 
     public Election() {
         super();
     }
 
-    public Election(String electionName, String electionType, Date startDate, Date endDate, int assingedTo, int createdBy) {
+    public Election(String electionName, String electionType, Date startDate, Date endDate, int assignedTo, int createdBy) {
         super();
         this.electionName = electionName;
         this.electionType = electionType;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.assingedTo = assingedTo;
+        this.assignedTo = assignedTo;
         this.createdBy = createdBy;
     }
 
-    public Election(int electionId,String electionName, String electionType, Date startDate, Date endDate, int assingedTo, int createdBy) {
+    public Election(int electionId, String electionName, String electionType, Date startDate, Date endDate, int assignedTo, int createdBy) {
         super();
         this.electionId = electionId;
         this.electionName = electionName;
         this.electionType = electionType;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.assingedTo = assingedTo;
+        this.assignedTo = assignedTo;
         this.createdBy = createdBy;
     }
 
@@ -67,8 +68,8 @@ public class Election {
         return endDate;
     }
 
-    public int getAssingedTo() {
-        return assingedTo;
+    public int getAssignedTo() {
+        return assignedTo;
     }
 
     public int getCreatedBy() {
@@ -95,8 +96,8 @@ public class Election {
         this.endDate = endDate;
     }
 
-    public void setAssingedTo(int assingedTo) {
-        this.assingedTo = assingedTo;
+    public void setAssignedTo(int assingedTo) {
+        this.assignedTo = assingedTo;
     }
 
     public void setCreatedBy(int createdBy) {
@@ -111,7 +112,7 @@ public class Election {
                 ", electionType='" + electionType + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", assingedTo=" + assingedTo +
+                ", assingedTo=" + assignedTo +
                 ", createdBy=" + createdBy +
                 '}';
     }

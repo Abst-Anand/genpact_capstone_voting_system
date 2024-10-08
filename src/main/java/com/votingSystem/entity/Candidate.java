@@ -1,7 +1,6 @@
 package com.votingSystem.entity;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -30,13 +29,15 @@ public class Candidate {
     private int partyLogoId;
     private int voteCount;
     private boolean isCandidatureRevoked;
-    private int created_by;
+    private int createdBy;
 
-    @CreatedDate
-    private LocalDateTime created_on;
+    private LocalDateTime createdOn;
+
+    @Transient
+    private int electionId;
 
 
-    public Candidate(int candidateId, String candidateName, String candidateDescription, String aadharNumber, int profilePicId, String partyName, int partyLogoId, int voteCount, boolean isCandidatureRevoked, int created_by) {
+    public Candidate(int candidateId, String candidateName, String candidateDescription, String aadharNumber, int profilePicId, String partyName, int partyLogoId, int voteCount, boolean isCandidatureRevoked, int createdBy) {
         this.candidateId = candidateId;
         this.candidateName = candidateName;
         this.candidateDescription = candidateDescription;
@@ -46,10 +47,10 @@ public class Candidate {
         this.partyLogoId = partyLogoId;
         this.voteCount = voteCount;
         this.isCandidatureRevoked = isCandidatureRevoked;
-        this.created_by = created_by;
+        this.createdBy = createdBy;
     }
 
-    public Candidate(String candidateName, String candidateDescription, String aadharNumber, int profilePicId, String partyName, int partyLogoId, int voteCount, boolean isCandidatureRevoked, int created_by) {
+    public Candidate(String candidateName, String candidateDescription, String aadharNumber, int profilePicId, String partyName, int partyLogoId, int voteCount, boolean isCandidatureRevoked, int createdBy) {
         this.candidateName = candidateName;
         this.candidateDescription = candidateDescription;
         this.aadharNumber = aadharNumber;
@@ -58,7 +59,37 @@ public class Candidate {
         this.partyLogoId = partyLogoId;
         this.voteCount = voteCount;
         this.isCandidatureRevoked = isCandidatureRevoked;
-        this.created_by = created_by;
+        this.createdBy = createdBy;
+    }
+
+    public Candidate(String candidateName, String candidateDescription, String aadharNumber, int profilePicId, String partyName, int partyLogoId, int createdBy) {
+        this.candidateName = candidateName;
+        this.candidateDescription = candidateDescription;
+        this.aadharNumber = aadharNumber;
+        this.profilePicId = profilePicId;
+        this.partyName = partyName;
+        this.partyLogoId = partyLogoId;
+        this.voteCount = 0;
+        this.isCandidatureRevoked = false;
+        this.createdBy = createdBy;
+    }
+
+    public Candidate() {
+        super();
+    }
+
+
+    @PrePersist
+    private void onCreate() {
+        this.createdOn = LocalDateTime.now();
+    }
+
+    public int getElectionId() {
+        return electionId;
+    }
+
+    public void setElectionId(int electionId) {
+        this.electionId = electionId;
     }
 
     public int getProfilePicId() {
@@ -69,30 +100,12 @@ public class Candidate {
         this.profilePicId = profilePicId;
     }
 
-    public LocalDateTime getCreated_on() {
-        return created_on;
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
     }
 
-    public void setCreated_on(LocalDateTime created_on) {
-        this.created_on = created_on;
-    }
-
-    public Candidate(String candidateName, String candidateDescription, String aadharNumber, int profilePicId, String partyName, int partyLogoId, int created_by) {
-        this.candidateName = candidateName;
-        this.candidateDescription = candidateDescription;
-        this.aadharNumber = aadharNumber;
-        this.profilePicId = profilePicId;
-        this.partyName = partyName;
-        this.partyLogoId = partyLogoId;
-        this.voteCount = 0;
-        this.isCandidatureRevoked = false;
-        this.created_by = created_by;
-    }
-
-
-
-    public Candidate() {
-        super();
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
     }
 
     public int getCandidateId() {
@@ -159,12 +172,12 @@ public class Candidate {
         isCandidatureRevoked = candidatureRevoked;
     }
 
-    public int getCreated_by() {
-        return created_by;
+    public int getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreated_by(int created_by) {
-        this.created_by = created_by;
+    public void setCreatedBy(int created_by) {
+        this.createdBy = created_by;
     }
 
     @Override
@@ -179,8 +192,9 @@ public class Candidate {
                 ", partyLogoId=" + partyLogoId +
                 ", voteCount=" + voteCount +
                 ", isCandidatureRevoked=" + isCandidatureRevoked +
-                ", created_by=" + created_by +
-                ", created_on=" + created_on +
+                ", created_by=" + createdBy +
+                ", created_on=" + createdOn +
+                ", electionId=" + electionId +
                 '}';
     }
 }

@@ -5,6 +5,7 @@ import com.votingSystem.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.votingSystem.entity.Image;
@@ -21,6 +22,10 @@ public class ImageService {
 
     public Image saveImage(Image image) {
         return imageRepository.save(image);
+    }
+
+    public List<Image> getAllImages() {
+        return imageRepository.findAll();
     }
 
     public int deleteImage(int id) {

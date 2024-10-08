@@ -109,7 +109,7 @@
 
             <button type="submit">Login</button>
 
-            <p class="voter-register-link"><a href="/user/registration-form" style="text-decoration: none;"><strong
+            <p class="voter-register-link"><a href="/voter-registration-form" style="text-decoration: none;"><strong
                     style="color: red">New Voter Registration?</strong></a></p>
 
         </form>

@@ -37,10 +37,6 @@ public class UserController {
         this.jwtService = jwtService;
     }
 
-    @GetMapping("/registration-form")
-    public String registrationForm() {
-        return "redirect:/voter_form.html";
-    }
 
     @PostMapping("/voter-registration")
     public String voterRegistration(
@@ -143,7 +139,7 @@ public class UserController {
         }
         else{
 //            return "redirect:/u_voter_dashboard.html";
-            return "test";
+            return "redirect:/u_voter_dashboard.html";
         }
 
 

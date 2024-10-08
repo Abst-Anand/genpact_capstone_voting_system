@@ -38,7 +38,7 @@ public class CandidateController {
 
     @GetMapping("/registration-form")
     public String registrationForm() {
-        return "candidate/registration";
+        return "s_candidate_registration";
     }
 
     @PostMapping("/register")
@@ -66,7 +66,7 @@ public class CandidateController {
             partyLogoPublicId = cloudinaryService.uploadImage(partyLogo);
         } catch (IOException e) {
             model.addAttribute("error", "Unable to upload party logo");
-            return "/candidate/registration";
+            return "s_candidate_registration";
         }
 
         int profilePicId = imageService.saveImage(new Image(profilePicPublicId)).getImageId();
@@ -86,7 +86,7 @@ public class CandidateController {
             model.addAttribute("error", "Unable to add candidate");
         }
 
-        return "/candidate/registration";
+        return "s_candidate_registration";
 
 
     }

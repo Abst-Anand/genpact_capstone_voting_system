@@ -1,6 +1,9 @@
 package com.votingSystem.entity;
 
 
+import jakarta.persistence.PrePersist;
+
+import java.time.LocalDateTime;
 
 public class Vote {
 
@@ -9,6 +12,8 @@ public class Vote {
     private int voterId;
     private int electionId;
     private int candidateId;
+    private LocalDateTime votedAt;
+
 
     public Vote() {
     }
@@ -24,6 +29,19 @@ public class Vote {
         this.voterId = voterId;
         this.electionId = electionId;
         this.candidateId = candidateId;
+    }
+
+    @PrePersist
+    private void onVote(){
+        votedAt = LocalDateTime.now();
+    }
+
+    public LocalDateTime getVotedAt() {
+        return votedAt;
+    }
+
+    public void setVotedAt(LocalDateTime votedAt) {
+        this.votedAt = votedAt;
     }
 
     public int getVoteId() {

@@ -12,5 +12,7 @@ public interface ElectionRepository extends JpaRepository<Election, Integer> {
     Election save(Election election);
     Election findById(int id);
 
+    List<Election> findElectionsByElectionTypeEquals(String electionType);
+
     List<Election> findAll();
 }

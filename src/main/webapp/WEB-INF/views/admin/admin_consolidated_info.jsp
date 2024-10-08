@@ -111,7 +111,7 @@
         <td><%=election.getStartDate() %></td>
         <td><%=election.getEndDate() %></td>
         <td><%=election.getCreatedBy() %></td>
-        <td><%=election.getAssingedTo() %></td>
+        <td><%=election.getAssignedTo() %></td>
 
     </tr>
 

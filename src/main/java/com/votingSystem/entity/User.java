@@ -3,6 +3,8 @@ package com.votingSystem.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 /* Role 1=Admin, 2=SubAdmin, 3=Voter
 * */
 /**
@@ -75,6 +77,10 @@ public class User {
      */
     private boolean isApproved;
 
+
+
+    private LocalDateTime createdOn;
+
     /**
      * The user's default constructor
      */
@@ -139,6 +145,19 @@ public class User {
         this.profilePictureId = profilePictureId;
         this.aadharNumber = aadharNumber;
         this.role = role;
+    }
+
+    @PrePersist
+    private void onCreate() {
+        this.createdOn = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
     }
 
     public int getUserId() {

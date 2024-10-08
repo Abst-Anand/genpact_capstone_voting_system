@@ -1,9 +1,18 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: araaz
+  Date: 08-10-2024
+  Time: 14:42
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error</title>
+    <link rel="icon" href="${pageContext.request.contextPath}/images/favicon.png" type="image/x-icon">
+    <title>ECI | Application Error</title>
     <style>
         body {
             display: flex;
@@ -65,11 +74,19 @@
 <body>
 
 <div class="error-container">
-    <img src="images/error-bg.png" alt="Error Image" class="error-image">
-<!--    <h1>Oops! Something went wrong</h1>-->
-    <p>We can't seem to find the page you're looking for.</p>
-    <a href="/" class="back-home">Go Back Home</a>
+    <img src="${pageContext.request.contextPath}/images/error-bg.png" alt="Error Image" class="error-image">
+
+    <p>We can't seem to find the resource you're looking for.</p>
+    <p style="color: red">${message}</p>
+    <a onclick="goBack()" class="back-home">Go Back</a>
 </div>
 
 </body>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
 </html>
