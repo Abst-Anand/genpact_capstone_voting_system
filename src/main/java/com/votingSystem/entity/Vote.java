@@ -18,6 +18,14 @@ public class Vote {
     public Vote() {
     }
 
+    public Vote(int voteId, int voterId, int electionId, int candidateId, LocalDateTime votedAt) {
+        this.voteId = voteId;
+        this.voterId = voterId;
+        this.electionId = electionId;
+        this.candidateId = candidateId;
+        this.votedAt = votedAt;
+    }
+
     public Vote(int voteId, int voterId, int electionId, int candidateId) {
         this.voteId = voteId;
         this.voterId = voterId;
@@ -31,10 +39,6 @@ public class Vote {
         this.candidateId = candidateId;
     }
 
-    @PrePersist
-    private void onVote(){
-        votedAt = LocalDateTime.now();
-    }
 
     public LocalDateTime getVotedAt() {
         return votedAt;

@@ -3,6 +3,7 @@ package com.votingSystem.service;
 import com.votingSystem.entity.Candidate;
 import com.votingSystem.repository.CandidateRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,6 +38,11 @@ public class CandidateService {
         Candidate candidate = findCandidateById(id);
         candidate.setCandidatureRevoked(status);
         return candidateRepository.save(candidate);
+    }
+
+    @Transactional
+    public int incrementVoteCount(int candidateId) {
+        return candidateRepository.incrementVote(candidateId);
     }
 
 }

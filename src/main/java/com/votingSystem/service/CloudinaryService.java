@@ -36,9 +36,9 @@ public class CloudinaryService {
     public CloudinaryService(Environment env) {
 
         // Printing cloudinary details for debugging
-        System.out.println("Cloudinary Name:" + env.getProperty("cloudinary.cloud_name"));
-        System.out.println("Cloudinary ApiKey:" + env.getProperty("cloudinary.api_key"));
-        System.out.println("Cloudinary ApiSecret:" + env.getProperty("cloudinary.api_secret"));
+//        System.out.println("Cloudinary Name:" + env.getProperty("cloudinary.cloud_name"));
+//        System.out.println("Cloudinary ApiKey:" + env.getProperty("cloudinary.api_key"));
+//        System.out.println("Cloudinary ApiSecret:" + env.getProperty("cloudinary.api_secret"));
 
         // Storing Cloudinary credentials in a map
         Map<String, String> credentials = new HashMap<>();

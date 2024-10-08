@@ -1,9 +1,6 @@
 package com.votingSystem.controller;
 
-import com.votingSystem.entity.Candidate;
-import com.votingSystem.entity.Election;
-import com.votingSystem.entity.Image;
-import com.votingSystem.entity.User;
+import com.votingSystem.entity.*;
 import com.votingSystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +31,9 @@ public class VoteController {
 
     @Autowired
     private ElectionParticipantsService electionParticipantsService;
+
+    @Autowired
+    private VoteService voteService;
 
     @Autowired
     private JwtService jwtService;
@@ -79,18 +79,24 @@ public class VoteController {
         model.addAttribute("municipalElections", mnElections);
 
         // Get Candidates in each of the above elections
-        for(Election election : lokSabhaElections) {
+        for (Election election : lokSabhaElections) {
             int electionId = election.getElectionId();
-            List<Candidate> temp = electionParticipantsService.getCandidatesByElectionId(electionId);
-            lsCandidates.addAll(temp);
+            if (!voteService.hasVoted(currentUser.getUserId(), electionId)) {
+                List<Candidate> temp = electionParticipantsService.getCandidatesByElectionId(electionId);
+                lsCandidates.addAll(temp);
+            }
         }
 
-        for(Election election : rajyaSabhaElections) {
-            rsCandidates.addAll(electionParticipantsService.getCandidatesByElectionId(election.getElectionId()));
+        for (Election election : rajyaSabhaElections) {
+            if (!voteService.hasVoted(currentUser.getUserId(), election.getElectionId())) {
+                rsCandidates.addAll(electionParticipantsService.getCandidatesByElectionId(election.getElectionId()));
+            }
         }
 
-        for(Election election : municipalElections) {
-            mnCandidates.addAll(electionParticipantsService.getCandidatesByElectionId(election.getElectionId()));
+        for (Election election : municipalElections) {
+            if (!voteService.hasVoted(currentUser.getUserId(), election.getElectionId())) {
+                mnCandidates.addAll(electionParticipantsService.getCandidatesByElectionId(election.getElectionId()));
+            }
         }
 
         model.addAttribute("lokSabhaCandidates", lsCandidates);
@@ -98,10 +104,9 @@ public class VoteController {
         model.addAttribute("municipalCorpCandidates", mnCandidates);
 
 
-
         // To get image URLs from images table
         List<Candidate> allCandidates = candidateService.findAllCandidates();
-        Map<Integer,String> partyLogo = new HashMap<Integer,String>();
+        Map<Integer, String> partyLogo = new HashMap<Integer, String>();
 
         for (Candidate candidate : allCandidates) {
             Image image = imageService.getImage(candidate.getPartyLogoId());
@@ -109,18 +114,33 @@ public class VoteController {
         }
 
         model.addAttribute("allPartyLogo", partyLogo);
-
         model.addAttribute("currentUser", currentUser);
 
         return "voter/voting_table";
     }
 
     @GetMapping("/voting")
-    public void voting(@RequestParam("voterId") int voterId, @RequestParam("electionId") int electionId, @RequestParam("candidateId") int candidateId, Model model) {
+    public String voting(@RequestParam("voterId") int voterId, @RequestParam("electionId") int electionId, @RequestParam("candidateId") int candidateId, Model model) {
 
         System.out.println("voterId = " + voterId);
         System.out.println("electionId = " + electionId);
         System.out.println("candidateId = " + candidateId);
+
+        Vote vote = new Vote(voterId, electionId, candidateId);
+
+
+        int voteCountStatus = candidateService.incrementVoteCount(candidateId);
+
+        int result = voteService.saveVote(vote);
+
+
+        if (result == 1 && voteCountStatus == 1) {
+            System.out.println("Voted Successfully");
+        } else {
+            System.out.println("Voted Failed");
+        }
+
+        return "hdh";
 
 
     }

@@ -61,7 +61,7 @@
     List<Candidate> rsCandidates = (List<Candidate>) request.getAttribute("rajyaSabhaCandidates");
 
     Map<Integer, String> mnElections = (Map<Integer, String> ) request.getAttribute("municipalElections");
-    List<Candidate> mcCandidates = (List<Candidate>) request.getAttribute("municipalCorpCandidates");
+    List<Candidate> mnCandidates = (List<Candidate>) request.getAttribute("municipalCorpCandidates");
 
     Map<Integer,String> allImages = (Map<Integer,String>) request.getAttribute("allPartyLogo");
 
@@ -134,7 +134,7 @@
     <%
 
         if (!lsCandidates.isEmpty()){
-            for(Candidate candidate : lsCandidates){
+            for(Candidate candidate : rsCandidates){
                 String logoPublicId = allImages.get(candidate.getPartyLogoId());
                 String imgSource = cloudinaryPrefix + logoPublicId;
 
@@ -142,7 +142,7 @@
     <tr>
 
         <td> <%=candidate.getCandidateName() %> </td>
-        <td> <%=lsElections.get(candidate.getElectionId()) %> </td>
+        <td> <%=rsElections.get(candidate.getElectionId()) %> </td>
         <td> <%=candidate.getPartyName() %> </td>
         <td> <img class="party-logo" src="<%= imgSource%>" alt="Party Logo"> </td>
 
@@ -183,7 +183,7 @@
     <%
 
         if (!lsCandidates.isEmpty()){
-            for(Candidate candidate : lsCandidates){
+            for(Candidate candidate : mnCandidates){
                 String logoPublicId = allImages.get(candidate.getPartyLogoId());
                 String imgSource = cloudinaryPrefix + logoPublicId;
 
@@ -191,7 +191,7 @@
     <tr>
 
         <td> <%=candidate.getCandidateName() %> </td>
-        <td> <%=lsElections.get(candidate.getElectionId()) %> </td>
+        <td> <%=mnElections.get(candidate.getElectionId()) %> </td>
         <td> <%=candidate.getPartyName() %> </td>
         <td> <img class="party-logo" src="<%= imgSource%>" alt="Party Logo"> </td>
 
