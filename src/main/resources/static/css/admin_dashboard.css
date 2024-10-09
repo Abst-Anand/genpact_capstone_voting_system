@@ -1,70 +1,96 @@
-/* Remove general reset */
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    height: 120vh;
+/* Container for the profile and confirmation details */
+/* Style for the confirmation alert box */
+.alert-box {
+    background-color: white; /* White background for alert box */
+    padding: 20px; /* Add padding inside the box */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for alert */
+    max-width: 400px; /* Set a max width for the alert box */
+    margin: 0 auto; /* Center the alert box */
+    text-align: center; /* Center the text inside the box */
+}
+ h1{
+    background-color: #f2f2f2;
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    border-left: 4px #C78A00 solid;
+    border-radius: 4px;
 }
 
-/* Dashboard body styling with gradient background */
-.dashboard-body {
-    background: linear-gradient(to bottom, #FF9933, white, #138808); /* Saffron, White, Green */
-    height: 100%;
+.confirmation-buttons {
+    margin-top: 20px; /* Space above buttons */
+}
+
+.confirmation-buttons .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.confirmation-buttons .btn:hover {
+    background-color: #0056b3;
+}
+
+
+.profile-container {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
     padding: 20px;
+    background-color: #FFFFE0; /* Pale yellow background */
 }
 
-/* Container styling */
-.container {
-    background-color: white;
-    padding: 20px;
-    width: 80%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Horizontal button bar */
-.button-bar {
+.left-section {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.profile-picture img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 50%;
+    border: 3px solid #ff9933;
+}
+
+/* White box around candidate details and confirmation */
+.right-section {
+    flex-grow: 1;
+    background-color: white; /* White background for the details and confirmation */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details {
     margin-bottom: 20px;
 }
 
-.tab-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #f0f0f0;
-    border: none;
+.confirmationdialog {
+    background-color: white; /* Same background as candidate details */
+    padding: 20px;
     border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-.tab-button.active {
+.confirmation-buttons {
+    margin-top: 10px;
+}
+
+.confirmation-buttons .btn {
+    padding: 10px 20px;
     background-color: #007bff;
     color: white;
-}
-
-/* Section content styling */
-.section-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.table-section {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.table-section.active {
-    display: block;
-    opacity: 1;
-}
-
-iframe {
-    width: 100%;
-    height: 600px;
     border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.confirmation-buttons .btn:hover {
+    background-color: #0056b3;
 }
