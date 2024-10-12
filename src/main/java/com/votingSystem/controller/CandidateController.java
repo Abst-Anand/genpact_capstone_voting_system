@@ -86,7 +86,7 @@ public class CandidateController {
             model.addAttribute("error", "Unable to add candidate");
         }
 
-        return "s_candidate_registration";
+        return "candidate/s_candidate_registration";
 
 
     }

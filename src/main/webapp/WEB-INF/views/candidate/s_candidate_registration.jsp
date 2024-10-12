@@ -2,7 +2,6 @@
 
 <%
     String tokenExpired = (String) request.getAttribute("tokenExpired");
-    System.out.println("TokenExpiredInIndexPageStatus: " + tokenExpired);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +30,6 @@
 <%
     String errorMessage = (String) request.getAttribute("error");
     String successMessage = (String) request.getAttribute("success");
-    System.out.println("error Msg: " + errorMessage);
 %>
 
 <div id="alert"></div>

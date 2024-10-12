@@ -8,7 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<jsp:include page="../alert.jsp"/>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forms.css">
 
@@ -29,8 +29,9 @@
 
 <h2 style="color: black">Create New Election</h2>
 
+<div id="alert"></div>
 
-<form id="voterForm" method="post" enctype="multipart/form-data">
+<form action="/election/create" method="post" enctype="multipart/form-data">
 
     <!-- Name -->
     <label for="name">Election Name:</label>
@@ -55,14 +56,14 @@
     <input type="datetime-local" id="end_date" name="end_date" title="dd-mm-yyyy hh:mm">
 
 
-    <label for="assig_to">Regional Officer:</label>
-    <select id="assig_to" name="election_type" title="Select Regional Officer">
+    <label for="assign_to">Regional Officer:</label>
+    <select id="assign_to" name="assignedTo" title="Select Regional Officer">
         <option value="drop-down-default" selected style="font-size: 12px">Select Regional Officer</option>
 
         <%
             if (subAdmins.isEmpty()) {
         %>
-        <option value="">
+        <option value="drop-down-default">
             -- No Regional Officers --
         </option>
                 <%
@@ -78,7 +79,6 @@
             }
         %>
 
-
     </select>
 
 
@@ -87,12 +87,10 @@
     <input type="text" id="created_by"  placeholder="<%= currentUser.getName()%>" style="cursor: not-allowed;" disabled>
     <input type="hidden" name="created_by" value="<%= currentUser.getUserId()%>" >
 
-
-
     <!-- Submit Button -->
     <div class="button-container">
         <button type="reset" id="resetButton">Reset</button>
-        <button id="submitButton">Submit</button>
+        <button type="submit" id="submitButton">Submit</button>
     </div>
 
 
