@@ -11,13 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
-
-import javax.sql.rowset.serial.SerialException;
 
 @Controller
 @RequestMapping("/admin")
@@ -28,7 +23,6 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
-    
 
 	@Autowired
 	UserDaoImpl u_UserImpl;
@@ -37,33 +31,38 @@ public class AdminController {
     public String showAdminConsolidatedInfo(Model model) {
         System.out.println("admin/info Controller called");
 
-        List<Election> allElectionsList = electionService.getAllElections();
-        List<User> allSubAdmins = userService.findSubAdmins();
-
-        model.addAttribute("allElections", allElectionsList);
-        model.addAttribute("allSubAdmins", allSubAdmins);
+        getAdminInfo(model);
 
         return "admin/admin_consolidated_info"; // Maps to /WEB-INF/views/admin_consolidated_info.jsp
     }
 
 
-
     @GetMapping("/manageAuthority")
-    public String manageAuthority(@RequestParam int subAdmin, RedirectAttributes attributes,Model model)
-    	throws IOException, SQLException {
+    public String manageAuthority(@RequestParam int subAdmin, Model model)
+            throws Exception {
 
-        System.out.println("subAdmin: " + subAdmin);
+
+        try{
+            u_UserImpl.revokeAuthority(subAdmin);
+
+            getAdminInfo(model);
+
+            return "redirect:/admin_dashboard.html";
+
+        }catch (Exception e){
+            throw new Exception("Unable to manage authority");
+        }
+
         
-        int result = u_UserImpl.revokeAuthority(subAdmin);
-        List<Election> allElectionsList = electionService.getAllElections();
+    }
+
+    private void getAdminInfo(Model model) {
+        List<Election> allOngoingElections = electionService.getAllOngoingElections();
+        List<Election> allPreviousElections = electionService.getAllPreviousElections();
         List<User> allSubAdmins = userService.findSubAdmins();
 
-        model.addAttribute("allElections", allElectionsList);
+        model.addAttribute("allOngoingElections", allOngoingElections);
+        model.addAttribute("allPreviousElections", allPreviousElections);
         model.addAttribute("allSubAdmins", allSubAdmins);
-     
-        attributes.addFlashAttribute("updateResult", result > 0 ? "Success" : "Failure");
-        
-        return "redirect:/admin_dashboard.html";
-        
     }
 }

@@ -39,7 +39,8 @@ caption {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add shadow */
 }
 tr:hover {
-    background-color: #93b1ef;
+    background-color: #05183e;
+    color: #f1e7d5;
 }
 
 td {

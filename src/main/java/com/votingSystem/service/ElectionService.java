@@ -5,6 +5,7 @@ import com.votingSystem.repository.ElectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,8 +17,12 @@ public class ElectionService {
         this.electionRepository = electionRepository;
     }
 
-    public List<Election> getAllElections() {
-        return electionRepository.findAll();
+    public List<Election> getAllOngoingElections() {
+        return electionRepository.findByEndDateAfter(LocalDateTime.now());
+    }
+
+    public List<Election> getAllPreviousElections() {
+        return electionRepository.findByEndDateBefore(LocalDateTime.now());
     }
 
     public Election insertElection(Election election) {
@@ -29,14 +34,14 @@ public class ElectionService {
     }
 
     public List<Election> getAllLokSabhaElections() {
-        return electionRepository.findElectionsByElectionTypeEquals("Lok Sabha");
+        return electionRepository.findByElectionTypeEqualsAndEndDateAfter("Lok Sabha", LocalDateTime.now());
     }
 
     public List<Election> getAllRajyaSabhaElections() {
-        return electionRepository.findElectionsByElectionTypeEquals("Rajya Sabha");
+        return electionRepository.findByElectionTypeEqualsAndEndDateAfter("Rajya Sabha", LocalDateTime.now());
     }
 
     public List<Election> getAllMunicipalElections() {
-        return electionRepository.findElectionsByElectionTypeEquals("Municipal Corporation");
+        return electionRepository.findByElectionTypeEqualsAndEndDateAfter("Municipal Corporation",LocalDateTime.now());
     }
 }

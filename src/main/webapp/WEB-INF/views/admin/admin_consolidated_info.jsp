@@ -14,7 +14,8 @@
 </head>
 <body>
 <%
-    List<Election> allElections = (List<Election>) request.getAttribute("allElections");
+    List<Election> allElections = (List<Election>) request.getAttribute("allOngoingElections");
+    List<Election> previousElections = (List<Election>) request.getAttribute("allPreviousElections");
     List<User> allSubAdmins = (List<User>) request.getAttribute("allSubAdmins");
 %>
 

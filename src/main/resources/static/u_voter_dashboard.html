@@ -16,21 +16,22 @@
     <div class="container">
         <!-- Horizontal button bar -->
         <div class="button-bar">
-            <button class="tab-button active" data-section="addTables">List of Candidates to Vote</button>
-            <button class="tab-button" data-section="audit">Profile</button>
+            <button class="tab-button active" data-section="addTables">Vote in Elections</button>
+            <button class="tab-button" data-section="profile">Profile</button>
         </div>
 
         <!-- Section where iframes will be displayed -->
         <div class="section-content">
             <!-- Content for Table -->
-            <div id="addTables" class="table-section active" >
-                <iframe src="/voter/info" title="Candidates Tables" width="100%" height="600" style="border:none;"></iframe>
+            <div id="addTables" class="table-section active">
+                <iframe src="/voter/info" title="Candidates Tables" width="100%" height="600"
+                        style="border:none;"></iframe>
             </div>
 
 
-         <!--   <div id="audit" class="table-section">
+            <div id="profile" class="table-section">
                 <iframe src="/user/profile" title="Audit" width="100%" height="600" style="border:none;"></iframe>
-            </div>-->
+            </div>
         </div>
     </div>
 </div>

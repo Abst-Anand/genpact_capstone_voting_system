@@ -2,6 +2,7 @@ package com.votingSystem.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -18,8 +19,8 @@ public class Election {
     @Column(length = 32)
     private String electionType;
 
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private int assignedTo;
     private int createdBy;
 
@@ -27,7 +28,7 @@ public class Election {
         super();
     }
 
-    public Election(String electionName, String electionType, Date startDate, Date endDate, int assignedTo, int createdBy) {
+    public Election(String electionName, String electionType, LocalDateTime startDate, LocalDateTime endDate, int assignedTo, int createdBy) {
         super();
         this.electionName = electionName;
         this.electionType = electionType;
@@ -37,7 +38,7 @@ public class Election {
         this.createdBy = createdBy;
     }
 
-    public Election(int electionId, String electionName, String electionType, Date startDate, Date endDate, int assignedTo, int createdBy) {
+    public Election(int electionId, String electionName, String electionType, LocalDateTime startDate, LocalDateTime endDate, int assignedTo, int createdBy) {
         super();
         this.electionId = electionId;
         this.electionName = electionName;
@@ -60,11 +61,11 @@ public class Election {
         return electionType;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
@@ -88,11 +89,11 @@ public class Election {
         this.electionType = electionType;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

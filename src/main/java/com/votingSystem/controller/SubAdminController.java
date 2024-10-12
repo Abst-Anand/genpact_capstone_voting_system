@@ -50,7 +50,7 @@ public class SubAdminController {
 	 @GetMapping("info")
 	 public String info(Model model) {
 
-		 List<Election> allElections = electionService.getAllElections();
+		 List<Election> allElections = electionService.getAllOngoingElections();
 		 List<Candidate> allCandidates = candidateService.findAllCandidates();
 
 		 User currentUser = jwtService.getCurrentUser();

@@ -9,7 +9,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1001; /* Ensure modal is above the rest of the content */
     border-radius: 8px;
-    display: none; /* Initially hidden */
+    display: block; /* Initially hidden */
     color: #C78A00;
 }
 

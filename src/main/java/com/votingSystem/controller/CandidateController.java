@@ -38,7 +38,7 @@ public class CandidateController {
 
     @GetMapping("/registration-form")
     public String registrationForm() {
-        return "s_candidate_registration";
+        return "candidate/s_candidate_registration";
     }
 
     @PostMapping("/register")

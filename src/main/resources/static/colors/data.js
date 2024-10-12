@@ -3,9 +3,12 @@ export const COLORS = {
     "body-bg-color": "blue",
     "font-color": "#333333",
 
-    "body-bg-light": "beige",
-    "body-bg-dark": "#555555",
+    "body-bg-light": "#F5F5F5",
+    "body-bg-dark": "#121212",
 
     "font-in-light-mode" : "black",
-    "font-in-dark-mode" : "white"
+    "font-in-dark-mode" : "#b3f4f4",
+
+    "test-color" : "#F5F5F5",
+    "test-color2":"#008080"
 }

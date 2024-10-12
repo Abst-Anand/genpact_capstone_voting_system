@@ -20,13 +20,15 @@ function updateDefaultStyles() {
     const header = document.querySelector('header');
     if (header) {
         header.style.backgroundColor = COLORS['header-bg-color'];
+
+        // Apply body background color
+        document.body.style.backgroundColor = COLORS['body-bg-light'];
+
+        // Apply font color
+        document.body.style.color = COLORS['font-color'];
     }
 
-    // Apply body background color
-    document.body.style.backgroundColor = COLORS['body-bg-light'];
 
-    // Apply font color
-    document.body.style.color = COLORS['font-color'];
 }
 
 // Function to attach event listeners to header buttons
