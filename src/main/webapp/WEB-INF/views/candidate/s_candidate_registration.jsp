@@ -1,25 +1,11 @@
+<%@ page import="com.votingSystem.entity.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%
-    String tokenExpired = (String) request.getAttribute("tokenExpired");
-%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script>
-        //handle token expiry redirect
-        var tokenExpired = "<%= tokenExpired %>";
-        // console.log("TokenExpired: " + tokenExpired)
-        // console.log("TokenExpired: " + typeof tokenExpired)
-        if (tokenExpired === "true") {
-            window.top.location.href = "/"
-        }
-    </script>
+<jsp:include page="../alert.jsp"/>
 
+<head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/globalAlert.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forms.css">
-
-
 
 </head>
 <body>
@@ -28,38 +14,11 @@
 
 
 <%
-    String errorMessage = (String) request.getAttribute("error");
-    String successMessage = (String) request.getAttribute("success");
+    User currentUser = (User) request.getAttribute("currentUser");
+
 %>
 
 <div id="alert"></div>
-<%
-    if (errorMessage != null) {
-%>
-<script type="module">
-    // show db alerts
-    import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
-    showAlert('failed', '<%= errorMessage%>')
-
-</script>
-
-<%
-    }
-%>
-
-<%
-    if (successMessage != null) {
-%>
-<script type="module">
-    // show db alerts
-    import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
-    showAlert('success', '<%= successMessage%>')
-
-</script>
-
-<%
-    }
-%>
 
 
 <form action="/candidate/register" method="post" enctype="multipart/form-data" onsubmit="return validateFormBeforeSubmit()">
@@ -94,8 +53,9 @@
 
     <!-- Created By -->
     <label for="createdBy">Created By:</label>
-    <input type="text"  placeholder="YB Jais"  style="cursor: not-allowed">
-    <input type="hidden" id="createdBy" name="createdBy" value=4 placeholder="YB Jais"  style="cursor: not-allowed">
+    <input type="text"  placeholder="<%= currentUser.getName()%>" disabled style="cursor: not-allowed">
+    <input type="hidden" id="createdBy" value="<%=currentUser.getUserId()%>" name="createdBy">
+
 
 
     <!-- Submit Button -->
@@ -208,4 +168,3 @@
 </body>
 
 
-</html>

@@ -21,9 +21,69 @@
 %>
 
 
-<h2 style="color: black">All Election Information</h2>
+<h2 style="color: black">All Candidates Information</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Aadhaar Number</th>
+        <th>Party Name</th>
+        <th>Authority</th>
+        <th>Manage Authority</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%
+        if (!allCandidates.isEmpty()){
+            for(Candidate candidate : allCandidates){
+
+    %>
+    <tr>
+        <td> <%=candidate.getCandidateId() %> </td>
+        <td> <%=candidate.getCandidateName()%> </td>
+        <td> <%=candidate.getAadharNumber() %> </td>
+        <td> <%=candidate.getPartyName() %> </td>
+
+        <%
+            if(candidate.isCandidatureRevoked()){
+
+        %>
+        <td class="status-inactive">Inactive</td>
+        <td class="action-icons">
+
+            <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/subadmin/manageAuthority?subadmin=<%=currentUser.getUserId()%>&candidates=<%=candidate.getCandidateId()%>')">
+                <i class="fas fa-check-circle"></i>
+            </button>
+        </td>
+        <%
+        }else{
+        %>
+        <td class="status-active">Active</td>
+        <td class="action-icons">
+            <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/subadmin/manageAuthority?subadmin=<%=currentUser.getUserId()%>&candidates=<%=candidate.getCandidateId() %>')">
+                <i class="fas fa-times-circle"></i>
+            </button>
+        </td>
 
 
+    </tr>
+
+    <%}
+    }
+    }else {
+    %>
+    <tr> -- No Candidates -- </tr>
+    <%
+        }
+    %>
+
+
+    </tbody>
+</table>
+
+
+<h2 style="color: black">All Elections Assigned To You</h2>
 <table>
     <thead>
     <tr>
@@ -63,68 +123,6 @@
     </tbody>
 </table>
 
-<h2 style="color: black">All Candidates Information</h2>
-
-
-<table>
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Aadhaar Number</th>
-        <th>Party Name</th>
-        <th>Authority</th>
-        <th>Manage Authority</th>
-    </tr>
-    </thead>
-    <tbody>
-    <%
-        if (!allCandidates.isEmpty()){
-            for(Candidate candidate : allCandidates){
-
-         %>
-    <tr>
-        <td> <%=candidate.getCandidateId() %> </td>
-        <td> <%=candidate.getCandidateName()%> </td>
-        <td> <%=candidate.getAadharNumber() %> </td>
-        <td> <%=candidate.getPartyName() %> </td>
-
-        <%
-            if(candidate.isCandidatureRevoked()){
-
-        %>
-                <td class="status-inactive">Inactive</td>
-                <td class="action-icons">
-
-                    <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/subadmin/manageAuthority?subadmin=<%=currentUser.getUserId()%>&candidates=<%=candidate.getCandidateId()%>')">
-                        <i class="fas fa-check-circle"></i>
-                    </button>
-                </td>
-            <%
-            }else{
-            %>
-                <td class="status-active">Active</td>
-                <td class="action-icons">
-                    <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/subadmin/manageAuthority?subadmin=<%=currentUser.getUserId()%>&candidates=<%=candidate.getCandidateId() %>')">
-                        <i class="fas fa-times-circle"></i>
-                    </button>
-                </td>
-
-
-    </tr>
-
-           <%}
-            }
-        }else {
-            %>
-            <tr> -- No Candidates -- </tr>
-        <%
-        }
-        %>
-
-
-    </tbody>
-</table>
 
 <!-- Confirmation Modal -->
 <div id="confirmationModal" class="modal" style="display: none">

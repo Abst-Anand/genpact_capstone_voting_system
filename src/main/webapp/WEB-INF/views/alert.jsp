@@ -11,6 +11,8 @@
     // console.log("TokenExpired: " + tokenExpired)
     // console.log("TokenExpired: " + typeof tokenExpired)
     if (tokenExpired === "true") {
+        // Store a flash message in session storage
+        sessionStorage.setItem('tokenExpired', 'Your login token is expired.');
         window.top.location.href = "/"
     }
 </script>

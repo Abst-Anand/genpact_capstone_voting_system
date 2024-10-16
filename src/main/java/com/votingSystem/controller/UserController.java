@@ -126,7 +126,7 @@ public class UserController {
         Cookie cookie = new Cookie("token", token);
         cookie.setHttpOnly(true); // Helps prevent XSS attacks
         cookie.setPath("/"); // Accessible to the entire application
-        cookie.setMaxAge(60 * 60); // Set cookie expiration (1 hour)
+        cookie.setMaxAge(60 ); // Set cookie expiration (1 mins)
 
         // Add the cookie to the response
         response.addCookie(cookie);
@@ -138,7 +138,6 @@ public class UserController {
             return "redirect:/s_subAdmin_dashboard.html";
         }
         else{
-//            return "redirect:/u_voter_dashboard.html";
             return "redirect:/u_voter_dashboard.html";
         }
 
@@ -147,6 +146,7 @@ public class UserController {
 
     @GetMapping("/profile")
     public String getUserProfile(@CookieValue(value = "token", defaultValue = "NA") String token, Model model) {
+
 
         if (token.equals("NA") || jwtService.isTokenExpired(token)) {
             System.out.println("Expired token");

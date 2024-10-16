@@ -1,21 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%
-    String tokenExpired = (String) request.getAttribute("tokenExpired");
+<jsp:include page="alert.jsp"/>
 
-%>
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        //handle token expiry redirect
-        var tokenExpired = "<%= tokenExpired %>";
-        // console.log("TokenExpired: " + tokenExpired)
-        // console.log("TokenExpired: " + typeof tokenExpired)
-        if (tokenExpired === "true") {
-            window.top.location.href = "/"
-        }
-    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="${pageContext.request.contextPath}/images/favicon.png" type="image/x-icon">
@@ -28,40 +17,8 @@
 <body>
 
 
-<%
-    String errorMessage = (String) request.getAttribute("error");
-    String successMessage = (String) request.getAttribute("success");
-%>
-
 <div id="alert"></div>
-<%
-    if (errorMessage != null) {
-%>
-<script type="module">
-    // show db alerts
-    import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
-    console.log("Loaded")
-    showAlert('failed', '<%= errorMessage%>')
 
-</script>
-
-<%
-    }
-%>
-
-<%
-    if (successMessage != null) {
-%>
-<script type="module">
-    // show db alerts
-    import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
-    showAlert('success', '<%= successMessage%>')
-
-</script>
-
-<%
-    }
-%>
 
 
 <!-- Include header here -->
@@ -166,13 +123,18 @@
     import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
     window.onload = ()=>{
         // Check if there's a logout message in session storage
-        const message = sessionStorage.getItem('logoutMessage');
+        const messageLogout = sessionStorage.getItem('logoutMessage');
+        const messageTokenExpired = sessionStorage.getItem('tokenExpired')
 
-        if(message){
-            showAlert('success', message)
-
+        if(messageLogout){
+            showAlert('success', messageLogout)
             // Remove the message from session storage after displaying it
             sessionStorage.removeItem('logoutMessage');
+        }
+        if(messageTokenExpired){
+            showAlert('failed', messageTokenExpired)
+            // Remove the message from session storage after displaying it
+            sessionStorage.removeItem('tokenExpired')
         }
     }
 </script>

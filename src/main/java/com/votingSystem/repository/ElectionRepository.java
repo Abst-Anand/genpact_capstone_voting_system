@@ -18,6 +18,8 @@ public interface ElectionRepository extends JpaRepository<Election, Integer> {
 
     List<Election> findByEndDateBefore(LocalDateTime startDate);
 
+    List<Election> findByAssignedToEquals(int assignedTo);
+
     List<Election> findByElectionTypeEqualsAndEndDateAfter(String electionType, LocalDateTime endDate);
 
     List<Election> findAll();

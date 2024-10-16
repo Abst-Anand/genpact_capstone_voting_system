@@ -3,9 +3,11 @@ package com.votingSystem.controller;
 
 import com.votingSystem.entity.Candidate;
 import com.votingSystem.entity.Image;
+import com.votingSystem.entity.User;
 import com.votingSystem.service.CandidateService;
 import com.votingSystem.service.CloudinaryService;
 import com.votingSystem.service.ImageService;
+import com.votingSystem.service.JwtService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,21 +25,23 @@ public class CandidateController {
     private final CandidateService candidateService;
     private final ImageService imageService;
     private final CloudinaryService cloudinaryService;
+    private final JwtService jwtService;
 
 
-    public CandidateController(CandidateService candidateService,ImageService imageService, CloudinaryService cloudinaryService) {
+    public CandidateController(CandidateService candidateService,ImageService imageService, CloudinaryService cloudinaryService, JwtService jwtService) {
         this.candidateService = candidateService;
         this.imageService = imageService;
         this.cloudinaryService = cloudinaryService;
+        this.jwtService = jwtService;
     }
 
 
 
-
-
-
     @GetMapping("/registration-form")
-    public String registrationForm() {
+    public String registrationForm(Model model) {
+
+        User currentUser = jwtService.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
         return "candidate/s_candidate_registration";
     }
 

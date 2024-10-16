@@ -26,7 +26,7 @@ button {
 }
 
 /* Disabled button style (optional) */
-button[disabled] {
+#submitButton:disabled {
     cursor: not-allowed;
     opacity: 0.6;
 }
@@ -36,6 +36,7 @@ button[disabled] {
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
+    overflow-x: hidden;
 }
 form {
     max-width: 400px;
@@ -53,7 +54,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="file"] {
-    width: 100%;
+    width: 95%;
     padding: 8px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -61,7 +62,7 @@ input[type="file"] {
 }
 select,
 input[type="datetime-local"] {
-    width: 100%;
+    width: 95%;
     padding: 8px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -129,7 +130,6 @@ input[type="submit"]:hover {
     margin: 30px;
     border-radius: 4px;
     font-family: Arial, sans-serif;
-
     align-items: center;
     justify-content: start;
     color: #333;

@@ -9,6 +9,7 @@ function loadHeader() {
         .then(response => response.text())
         .then(data => {
             document.getElementById('header').innerHTML = data;
+            document.body.style.removeProperty('color');
             updateDefaultStyles();
             attachHeaderEvents();
         })
@@ -133,8 +134,10 @@ function attachHeaderEvents() {
     });
 }
 
-
-
+export function jspHeaderLoader(){
+    updateDefaultStyles();
+    attachHeaderEvents();
+}
 
 
 // Load the header when the page loads

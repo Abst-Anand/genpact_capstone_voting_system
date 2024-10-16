@@ -2,7 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="com.votingSystem.entity.User" %>
-<%@ page import="com.votingSystem.entity.Election" %><%--
+
+<%--
   Created by IntelliJ IDEA.
   User: araaz
   Date: 07-10-2024
@@ -50,10 +51,12 @@
 <body>
 <%!
     String cloudinaryPrefix = "https://res.cloudinary.com/dl1hqxniz/image/upload/v1727458264/";
+    String voteApi = "/voter/confirm-vote";
 %>
 
 <%
     User currentUser = (User) request.getAttribute("currentUser");
+
     Map<Integer, String> lsElections = (Map<Integer, String> ) request.getAttribute("lokSabhaElections");
     List<Candidate> lsCandidates = (List<Candidate>) request.getAttribute("lokSabhaCandidates");
 
@@ -98,7 +101,7 @@
         <td> <img class="party-logo" src="<%= imgSource%>" alt="Party Logo"> </td>
 
         <td class="action-icons">
-            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('/voter/voting?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>')">
+            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('<%=voteApi%>?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>')">
                 <i class="fa-solid fa-check-to-slot"></i>
             </button>
         </td>
@@ -147,7 +150,7 @@
         <td> <img class="party-logo" src="<%= imgSource%>" alt="Party Logo"> </td>
 
         <td class="action-icons">
-            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('/voter/voting?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>')">
+            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('<%=voteApi%>?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>')">
                 <i class="fa-solid fa-check-to-slot"></i>
             </button>
         </td>
@@ -196,7 +199,7 @@
         <td> <img class="party-logo" src="<%= imgSource%>" alt="Party Logo"> </td>
 
         <td class="action-icons">
-            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('/voter/voting?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>')">
+            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('<%=voteApi%>?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>')">
                 <i class="fa-solid fa-check-to-slot"></i>
             </button>
         </td>

@@ -1,21 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%
-    String tokenExpired = (String) request.getAttribute("tokenExpired");
-    System.out.println("TokenExpiredInIndexPageStatus: " + tokenExpired);
-%>
-<!DOCTYPE html>
+<jsp:include page="../alert.jsp"/>
+
 <html lang="en">
 <head>
-    <script>
-        //handle token expiry redirect
-        var tokenExpired = "<%= tokenExpired %>";
-        // console.log("TokenExpired: " + tokenExpired)
-        // console.log("TokenExpired: " + typeof tokenExpired)
-        if (tokenExpired === "true") {
-            window.top.location.href = "/"
-        }
-    </script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/globalAlert.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forms.css">
@@ -27,41 +15,7 @@
 
 <h2 style="color: black">Regional Officer Registration </h2>
 
-
-<%
-    String errorMessage = (String) request.getAttribute("error");
-    String successMessage = (String) request.getAttribute("success");
-    System.out.println("error Msg: " + errorMessage);
-%>
-
 <div id="alert"></div>
-<%
-    if (errorMessage != null) {
-%>
-<script type="module">
-    // show db alerts
-    import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
-    showAlert('failed', '<%= errorMessage%>')
-
-</script>
-
-<%
-    }
-%>
-
-<%
-    if (successMessage != null) {
-%>
-<script type="module">
-    // show db alerts
-    import { showAlert } from '${pageContext.request.contextPath}/js/globalAlert.js';
-    showAlert('success', '<%= successMessage%>')
-
-</script>
-
-<%
-    }
-%>
 
 
 <form action="/subAdmin/register" method="post" enctype="multipart/form-data">

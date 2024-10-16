@@ -50,17 +50,16 @@ public class SubAdminController {
 	 @GetMapping("info")
 	 public String info(Model model) {
 
-		 List<Election> allElections = electionService.getAllOngoingElections();
-		 List<Candidate> allCandidates = candidateService.findAllCandidates();
-
 		 User currentUser = jwtService.getCurrentUser();
+
+		 List<Election> allElections = electionService.findSubAdminElections(currentUser.getUserId());
+		 List<Candidate> allCandidates = candidateService.findAllCandidates();
 
 		 model.addAttribute("allElections", allElections);
 		 model.addAttribute("allCandidates", allCandidates);
 		 model.addAttribute("currentUser", currentUser);
 
 		 return "subAdmin/s_subAdmin_consolidated_info";
-
 	 }
 	 
 	 @GetMapping("/voter-info")
@@ -134,16 +133,13 @@ public class SubAdminController {
 		User savedUser = userService.saveUser(user);
 
 
-
 		if(savedUser != null){
-			model.addAttribute("success", "RegionalOffcier has been registered successfully");
+			model.addAttribute("success", "Regional Officer has been registered successfully");
 		}else{
-			model.addAttribute("error", "Unable to add Regional Offcier");
+			model.addAttribute("error", "Unable to add Regional Officer");
 		}
 
 		return "subAdmin/s_registration";
-
-
 	}
 	    
 	 

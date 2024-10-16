@@ -2,14 +2,17 @@ package com.votingSystem.controller;
 
 import com.votingSystem.entity.*;
 import com.votingSystem.service.*;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -128,11 +131,9 @@ public class VoteController {
 
         Vote vote = new Vote(voterId, electionId, candidateId);
 
-
         int voteCountStatus = candidateService.incrementVoteCount(candidateId);
 
         int result = voteService.saveVote(vote);
-
 
         if (result == 1 && voteCountStatus == 1) {
             System.out.println("Voted Successfully");
@@ -141,8 +142,38 @@ public class VoteController {
         }
 
         return "hdh";
+    }
+
+    @GetMapping("/confirm-vote")
+    public String confirmVote(@RequestParam("voterId") int voterId, @RequestParam("electionId") int electionId, @RequestParam("candidateId") int candidateId, RedirectAttributes redirectAttribute) {
+
+        System.out.println("voterId = " + voterId);
+        System.out.println("electionId = " + electionId);
+        System.out.println("candidateId = " + candidateId);
+
+        redirectAttribute.addFlashAttribute("voterId", voterId);
+        redirectAttribute.addFlashAttribute("electionId", electionId);
+        redirectAttribute.addFlashAttribute("candidateId", candidateId);
 
 
+        return "redirect:/voter/confirmation";
+    }
+
+    @GetMapping("/confirmation")
+    public String confirmationPage(Model model) {
+
+        int voterId = (int) model.getAttribute("voterId");
+        int electionId = (int) model.getAttribute("electionId");
+        int candidateId = (int) model.getAttribute("candidateId");
+
+        Candidate candidate = candidateService.findCandidateById(candidateId);
+
+        model.addAttribute("candidate", candidate);
+        model.addAttribute("voterId", voterId);
+        model.addAttribute("electionId", electionId);
+        model.addAttribute("candidateId", candidateId);
+
+        return "voter/u_voter_confirmation";
     }
 
 }

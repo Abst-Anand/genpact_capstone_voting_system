@@ -46,7 +46,7 @@ public class JwtService {
 
         System.out.println("Jwt Key " + env.getProperty("jwt.secret_key"));
 
-        long timeout = 1000 * 60 * 60L; // 1 hour
+        long timeout = 1000  * 60L; // 1 min
         Date issuedAt = new Date();
         Date expirationAt = new Date(issuedAt.getTime() + timeout);
 
@@ -74,6 +74,7 @@ public class JwtService {
      * @return true if the token is expired, false otherwise.
      */
     public boolean isTokenExpired(String token) {
+//        System.out.println(extractAllClaims(token).getExpiration().before(new Date()));
         return extractAllClaims(token).getExpiration().before(new Date());
     }
 

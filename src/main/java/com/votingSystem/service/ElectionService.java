@@ -33,6 +33,10 @@ public class ElectionService {
         return electionRepository.findById(id);
     }
 
+    public List<Election> findSubAdminElections(int assignedTo) {
+        return electionRepository.findByAssignedToEquals(assignedTo);
+    }
+
     public List<Election> getAllLokSabhaElections() {
         return electionRepository.findByElectionTypeEqualsAndEndDateAfter("Lok Sabha", LocalDateTime.now());
     }
