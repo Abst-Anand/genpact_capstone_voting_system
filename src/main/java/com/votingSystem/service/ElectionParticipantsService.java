@@ -24,7 +24,7 @@ public class ElectionParticipantsService implements ElectionsParticipantsReposit
 
     @Override
     public List<Candidate> getCandidatesByElectionId(int election_id) {
-        String sql = "select * from candidates  natural join election_participants where election_id = ?";
+        String sql = "select * from candidates  natural join election_participants where election_id = ? and is_candidature_revoked = false";
         return jdbcTemplate.query(sql, new CandidateRowMapper(), election_id);
     }
 }

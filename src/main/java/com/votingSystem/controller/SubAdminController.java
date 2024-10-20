@@ -21,129 +21,142 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-
 @Controller
 @RequestMapping("/subAdmin")
 public class SubAdminController {
-	
-	 @Autowired
-	 private UserService userService;
 
-	 @Autowired
-	 private ElectionService electionService;
+    @Autowired
+    private UserService userService;
 
-	 @Autowired
-	 private CandidateService candidateService;
+    @Autowired
+    private ElectionService electionService;
 
-	 @Autowired
-	 private ImageService imageService;
+    @Autowired
+    private CandidateService candidateService;
 
-	 @Autowired
-	 private CloudinaryService cloudinaryService;
+    @Autowired
+    private ImageService imageService;
 
-	 @Autowired
-	 private JwtService jwtService;
-	
-	 @Autowired
-	 UserDaoImpl u_UserImpl;
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
-	 @GetMapping("info")
-	 public String info(Model model) {
+    @Autowired
+    private JwtService jwtService;
 
-		 User currentUser = jwtService.getCurrentUser();
+    @Autowired
+    UserDaoImpl u_UserImpl;
 
-		 List<Election> allElections = electionService.findSubAdminElections(currentUser.getUserId());
-		 List<Candidate> allCandidates = candidateService.findAllCandidates();
+    @GetMapping("info")
+    public String info(Model model) {
 
-		 model.addAttribute("allElections", allElections);
-		 model.addAttribute("allCandidates", allCandidates);
-		 model.addAttribute("currentUser", currentUser);
+        User currentUser = jwtService.getCurrentUser();
 
-		 return "subAdmin/s_subAdmin_consolidated_info";
-	 }
-	 
-	 @GetMapping("/voter-info")
-	    public String showAdminConsolidatedInfo(Model model) {
-	        System.out.println("subAdmin/info Controller called");
-	      
-	        List<User> allVoters = userService.findPendingVoters();
+        List<Election> allElections = electionService.findSubAdminElections(currentUser.getUserId());
+        List<Candidate> allCandidates = candidateService.findAllCandidates();
 
-	        model.addAttribute("allVoters", allVoters);
+        model.addAttribute("allElections", allElections);
+        model.addAttribute("allCandidates", allCandidates);
+        model.addAttribute("currentUser", currentUser);
 
-	        return "subAdmin/u_pending_voters"; // Maps to /WEB-INF/views/voter/u_voter_consolidated_info.jsp
-	    }
-	 
+        return "subAdmin/s_subAdmin_consolidated_info";
+    }
 
-	    @GetMapping("/manageVoters")
-	    public String manageAuthority(@RequestParam int subAdminId, @RequestParam int voterId, RedirectAttributes attributes,Model model)
-	    	throws IOException, SQLException {
+    @GetMapping("/voter-info")
+    public String showAdminConsolidatedInfo(Model model) {
+        System.out.println("subAdmin/info Controller called");
 
-	        System.out.println("admin: " + subAdminId);
-	        System.out.println("subAdmin: " + voterId);
-	        
-	        int result = u_UserImpl.isApproved(voterId);
-	        
-	        List<User> allVoters = userService.findPendingVoters();
+        List<User> allVoters = userService.findPendingVoters();
 
-	        model.addAttribute("allVoters", allVoters);
+        model.addAttribute("allVoters", allVoters);
 
-	        attributes.addFlashAttribute("updateResult", result > 0 ? "Success" : "Failure");
-	        
-	        return "redirect:/s_subAdmin_dashboard.html";
-	        
-	    }
+        return "subAdmin/u_pending_voters"; // Maps to /WEB-INF/views/voter/u_voter_consolidated_info.jsp
+    }
 
-	@GetMapping("/subAdmin-form")
-	public String registrationForm() {
-		return "subAdmin/s_registration";
-	}
+    @GetMapping("/manageVoters")
+    public String manageAuthority(@RequestParam int subAdminId, @RequestParam int voterId, RedirectAttributes attributes, Model model)
+            throws IOException, SQLException {
 
-	@PostMapping("/register")
-	public String RegionalRegistration(  @RequestParam String name,
-										 @RequestParam String email,
-										 @RequestParam MultipartFile profilePic,
-										 @RequestParam String aadharNumber,
-										 @RequestParam String password,
-										 Model model
-	){
-		System.out.println("subAdmin/register called");
+        System.out.println("admin: " + subAdminId);
+        System.out.println("subAdmin: " + voterId);
 
-		String profilePicturePublicId ;
+        int result = u_UserImpl.isApproved(voterId);
 
-		email = email.toLowerCase();
+        List<User> allVoters = userService.findPendingVoters();
 
-		//Upload image to Cloudinary
-		try {
-			profilePicturePublicId = cloudinaryService.uploadImage(profilePic);
-		}catch (IOException e){
-			model.addAttribute("errorMessage", "Image upload failed. Try again.");
-			return "redirect:/user/registration-form";
-		}
+        model.addAttribute("allVoters", allVoters);
 
+        attributes.addFlashAttribute("updateResult", result > 0 ? "Success" : "Failure");
 
-		int profilePicId = imageService.saveImage(new Image(profilePicturePublicId)).getImageId();
+        return "redirect:/s_subAdmin_dashboard.html";
 
-		String encryptedPassword = userService.encryptPassword(password);
-		System.out.println("Encrypted password: " + encryptedPassword);
+    }
+
+    @GetMapping("/subAdmin-form")
+    public String registrationForm() {
+        return "subAdmin/s_registration";
+    }
+
+    @PostMapping("/register")
+    public String RegionalRegistration(@RequestParam String name,
+                                       @RequestParam String email,
+                                       @RequestParam MultipartFile profilePic,
+                                       @RequestParam String aadharNumber,
+                                       @RequestParam String password,
+                                       Model model
+    ) {
+        System.out.println("subAdmin/register called");
+
+        String profilePicturePublicId;
+
+        email = email.toLowerCase();
+
+        //Upload image to Cloudinary
+        try {
+            profilePicturePublicId = cloudinaryService.uploadImage(profilePic);
+        } catch (IOException e) {
+            model.addAttribute("errorMessage", "Image upload failed. Try again.");
+            return "redirect:/user/registration-form";
+        }
 
 
-		User user = new User(name,email,profilePicId,aadharNumber,2,encryptedPassword,0,true);
-		System.out.println(user);
+        int profilePicId = imageService.saveImage(new Image(profilePicturePublicId)).getImageId();
 
-		User savedUser = userService.saveUser(user);
+        String encryptedPassword = userService.encryptPassword(password);
+        System.out.println("Encrypted password: " + encryptedPassword);
 
 
-		if(savedUser != null){
-			model.addAttribute("success", "Regional Officer has been registered successfully");
-		}else{
-			model.addAttribute("error", "Unable to add Regional Officer");
-		}
+        User user = new User(name, email, profilePicId, aadharNumber, 2, encryptedPassword, 0, true);
+        System.out.println(user);
 
-		return "subAdmin/s_registration";
-	}
-	    
-	 
-	    
-	 
+        User savedUser = userService.saveUser(user);
 
-}
+
+        if (savedUser != null) {
+            model.addAttribute("success", "Regional Officer has been registered successfully");
+        } else {
+            model.addAttribute("error", "Unable to add Regional Officer");
+        }
+
+        return "subAdmin/s_registration";
+    }
+
+    @GetMapping("/manageAuthority")
+    public String manageCandidates(@RequestParam int subAdminId, @RequestParam int candidateId, Model model)
+            throws Exception {
+
+        System.out.println("Candidate manage authority called");
+
+        System.out.println("subAdmin: " + subAdminId);
+        System.out.println("Candidate: " + candidateId);
+        try {
+            u_UserImpl.revokeAuthorityCandidate(candidateId);
+            List<Candidate> allCandidates = candidateService.findAllCandidates();
+            model.addAttribute("allCandidates", allCandidates);
+            return "redirect:/s_subAdmin_dashboard.html";
+        } catch (Exception e) {
+            throw new Exception("Unable to manage authority");
+        }
+    }
+
+
+    }

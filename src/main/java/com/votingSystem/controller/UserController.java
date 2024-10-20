@@ -2,10 +2,8 @@ package com.votingSystem.controller;
 
 import com.votingSystem.entity.Image;
 import com.votingSystem.entity.User;
-import com.votingSystem.service.CloudinaryService;
-import com.votingSystem.service.ImageService;
-import com.votingSystem.service.UserService;
-import com.votingSystem.service.JwtService;
+import com.votingSystem.service.*;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 import org.springframework.stereotype.Controller;
@@ -28,13 +26,15 @@ public class UserController {
     private final ImageService imageService;
     private final CloudinaryService cloudinaryService;
     private final JwtService jwtService;
+    private final EmailService emailService;
 
 
-    public UserController(UserService userService, ImageService imageService, CloudinaryService cloudinaryService, JwtService jwtService) {
+    public UserController(UserService userService, ImageService imageService, CloudinaryService cloudinaryService, JwtService jwtService, EmailService emailService) {
         this.userService = userService;
         this.imageService = imageService;
         this.cloudinaryService = cloudinaryService;
         this.jwtService = jwtService;
+        this.emailService = emailService;
     }
 
 
@@ -126,7 +126,7 @@ public class UserController {
         Cookie cookie = new Cookie("token", token);
         cookie.setHttpOnly(true); // Helps prevent XSS attacks
         cookie.setPath("/"); // Accessible to the entire application
-        cookie.setMaxAge(60 ); // Set cookie expiration (1 mins)
+        cookie.setMaxAge(60 * 15); // Set cookie expiration (15 mins)
 
         // Add the cookie to the response
         response.addCookie(cookie);
@@ -151,7 +151,7 @@ public class UserController {
         if (token.equals("NA") || jwtService.isTokenExpired(token)) {
             System.out.println("Expired token");
             // Pass a flag to the front-end to trigger the JS-based redirection
-            model.addAttribute("tokenExpired", "true");
+            model.addAttribute("tokenExpired", "EXP");
             return "index";  // This loads a profile page containing the redirect script
         }
 
@@ -180,6 +180,25 @@ public class UserController {
         return "profile";
     }
 
+    @GetMapping("/forget-password")
+    public String forgetPassword(){
+        return "forget-password";
+    }
+
+    @GetMapping("/send-otp")
+    public String sendEmail(@RequestParam String to){
+
+        String otp = String.valueOf((int) ((Math.random() * 900000) + 100000));
+        System.out.println("OTP: " + otp);
+
+        try {
+            emailService.sendEmail(to, otp);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+
+    }
 
 
 

@@ -108,7 +108,7 @@ public class VoteController {
 
 
         // To get image URLs from images table
-        List<Candidate> allCandidates = candidateService.findAllCandidates();
+        List<Candidate> allCandidates = candidateService.findAllActiveCandidates();
         Map<Integer, String> partyLogo = new HashMap<Integer, String>();
 
         for (Candidate candidate : allCandidates) {
@@ -122,8 +122,8 @@ public class VoteController {
         return "voter/voting_table";
     }
 
-    @GetMapping("/voting")
-    public String voting(@RequestParam("voterId") int voterId, @RequestParam("electionId") int electionId, @RequestParam("candidateId") int candidateId, Model model) {
+    @PostMapping("/voting")
+    public String voting(@RequestParam("voterId") int voterId, @RequestParam("electionId") int electionId, @RequestParam("candidateId") int candidateId, @RequestParam String electionName , Model model) {
 
         System.out.println("voterId = " + voterId);
         System.out.println("electionId = " + electionId);
@@ -136,24 +136,26 @@ public class VoteController {
         int result = voteService.saveVote(vote);
 
         if (result == 1 && voteCountStatus == 1) {
-            System.out.println("Voted Successfully");
+            model.addAttribute("message","You have successfully voted in " + electionName);
         } else {
-            System.out.println("Voted Failed");
+            model.addAttribute("message","Voting failed, kindly try again");
         }
 
-        return "hdh";
+        return "voter/u_voter_success";
     }
 
     @GetMapping("/confirm-vote")
-    public String confirmVote(@RequestParam("voterId") int voterId, @RequestParam("electionId") int electionId, @RequestParam("candidateId") int candidateId, RedirectAttributes redirectAttribute) {
+    public String confirmVote(@RequestParam("voterId") int voterId, @RequestParam("electionId") int electionId, @RequestParam("candidateId") int candidateId, @RequestParam String electionName ,RedirectAttributes redirectAttribute) {
 
         System.out.println("voterId = " + voterId);
         System.out.println("electionId = " + electionId);
         System.out.println("candidateId = " + candidateId);
+        System.out.println("Election Name = " + electionName);
 
         redirectAttribute.addFlashAttribute("voterId", voterId);
         redirectAttribute.addFlashAttribute("electionId", electionId);
         redirectAttribute.addFlashAttribute("candidateId", candidateId);
+        redirectAttribute.addFlashAttribute("electionName", electionName);
 
 
         return "redirect:/voter/confirmation";
@@ -165,13 +167,23 @@ public class VoteController {
         int voterId = (int) model.getAttribute("voterId");
         int electionId = (int) model.getAttribute("electionId");
         int candidateId = (int) model.getAttribute("candidateId");
+        String electionName = (String) model.getAttribute("electionName");
 
         Candidate candidate = candidateService.findCandidateById(candidateId);
 
+        String profilePicture = imageService.getImage(candidate.getProfilePicId()).getImageUrl();
+        String partyLogo = imageService.getImage(candidate.getPartyLogoId()).getImageUrl();
+
+
+        model.addAttribute("electionName", electionName);
+        model.addAttribute("profilePicture", profilePicture);
+        model.addAttribute("partyLogo", partyLogo);
         model.addAttribute("candidate", candidate);
+
         model.addAttribute("voterId", voterId);
         model.addAttribute("electionId", electionId);
         model.addAttribute("candidateId", candidateId);
+
 
         return "voter/u_voter_confirmation";
     }

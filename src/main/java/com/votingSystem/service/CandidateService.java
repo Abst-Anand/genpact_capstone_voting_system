@@ -24,6 +24,10 @@ public class CandidateService {
         return candidateRepository.findAll();
     }
 
+    public List<Candidate> findAllActiveCandidates() {
+        return candidateRepository.findByIsCandidatureRevokedFalse();
+    }
+
     public Candidate saveCandidate(Candidate candidate) {
         return candidateRepository.save(candidate);
     }

@@ -47,6 +47,10 @@ public class VoteService implements VoteRepository {
 
         String sql = "SELECT COUNT(*) FROM vote WHERE voter_id = ? and election_id = ?";
 
+//        System.out.println("hasVoted");
+//        System.out.println(userId);
+//        System.out.println(electionId);
+
         // Execute the query and get the count
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId, electionId);
 

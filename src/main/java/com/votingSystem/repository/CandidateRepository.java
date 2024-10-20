@@ -20,6 +20,8 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
 
     List<Candidate> findAll();
 
+    List<Candidate> findByIsCandidatureRevokedFalse();
+
     @Modifying
     @Query("UPDATE Candidate c SET  c.voteCount = c.voteCount + 1 WHERE c.candidateId= :cId")
     int incrementVote(@Param("cId") int candidateId);

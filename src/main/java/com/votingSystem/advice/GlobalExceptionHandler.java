@@ -25,6 +25,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ModelAndView handleGenericException(Exception ex) {
+
         ModelAndView mav = new ModelAndView();
 
         mav.addObject("message", ex.getMessage());
@@ -40,4 +41,5 @@ public class GlobalExceptionHandler {
 //        mav.setViewName("errorPage");
 //        return mav;
 //    }
+
 }

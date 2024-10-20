@@ -43,14 +43,12 @@
     <div class="left-section">
         <div class="carousel">
             <!-- Carousel Images -->
-            <img width="2544" height="1272" id="carousel-image-1" src="${pageContext.request.contextPath}/images/c1tr.jpg" alt="Indian Culture 1"
-                 class="show">
-            <img width="2544" height="1272" id="carousel-image-2" src="${pageContext.request.contextPath}/images/c2-transformed.jpeg"
-                 alt="Indian Culture 2">
-            <img width="2544" height="1272" id="carousel-image-3" src="${pageContext.request.contextPath}/images/c3tr.jpg" alt="Indian Culture 3">
-            <img width="2544" height="1272" id="carousel-image-4" src="${pageContext.request.contextPath}/images/c4tr.jpg" alt="Indian Culture 3">
-            <img width="2544" height="1272" id="carousel-image-5" src="${pageContext.request.contextPath}/images/c5tr.jpg" alt="Indian Culture 3">
-            <img width="2544" height="1272" id="carousel-image-6" src="${pageContext.request.contextPath}/images/c6tr.jpg" alt="Indian Culture 3">
+            <img width="2544" height="1272" id="carousel-image-1" src="${pageContext.request.contextPath}/images/img3.jpg" alt="Indian Culture 1" class="show">
+            <img width="2544" height="1272" id="carousel-image-2" src="${pageContext.request.contextPath}/images/img6.jpg" alt="Indian Culture 2">
+            <img width="2544" height="1272" id="carousel-image-3" src="${pageContext.request.contextPath}/images/img1.jpg" alt="Indian Culture 3">
+            <img width="2544" height="1272" id="carousel-image-4" src="${pageContext.request.contextPath}/images/img5.jpg" alt="Indian Culture 3">
+            <img width="2544" height="1272" id="carousel-image-5" src="${pageContext.request.contextPath}/images/img2.jpg" alt="Indian Culture 3">
+            <img width="2544" height="1272" id="carousel-image-6" src="${pageContext.request.contextPath}/images/img4.jpg" alt="Indian Culture 3">
             <div class="carousel-text"></div>
         </div>
     </div>
@@ -63,6 +61,7 @@
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <a id="forgot-password" href="/">Forgot Password?</a>
 
             <button type="submit">Login</button>
 

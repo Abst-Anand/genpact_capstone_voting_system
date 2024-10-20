@@ -51,7 +51,7 @@
 <body>
 <%!
     String cloudinaryPrefix = "https://res.cloudinary.com/dl1hqxniz/image/upload/v1727458264/";
-    String voteApi = "/voter/confirm-vote";
+    String voteConfirmApi = "/voter/confirm-vote";
 %>
 
 <%
@@ -91,17 +91,18 @@
             for(Candidate candidate : lsCandidates){
                 String logoPublicId = allImages.get(candidate.getPartyLogoId());
                 String imgSource = cloudinaryPrefix + logoPublicId;
+                String electionName =lsElections.get(candidate.getElectionId()) ;
 
     %>
     <tr>
 
         <td> <%=candidate.getCandidateName() %> </td>
-        <td> <%=lsElections.get(candidate.getElectionId()) %> </td>
+        <td> <%=electionName %> </td>
         <td> <%=candidate.getPartyName() %> </td>
         <td> <img class="party-logo" src="<%= imgSource%>" alt="Party Logo"> </td>
 
         <td class="action-icons">
-            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('<%=voteApi%>?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>')">
+            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('<%=voteConfirmApi%>?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>&electionName=<%=electionName%>')">
                 <i class="fa-solid fa-check-to-slot"></i>
             </button>
         </td>
@@ -136,21 +137,22 @@
     <tbody>
     <%
 
-        if (!lsCandidates.isEmpty()){
+        if (!rsCandidates.isEmpty()){
             for(Candidate candidate : rsCandidates){
                 String logoPublicId = allImages.get(candidate.getPartyLogoId());
                 String imgSource = cloudinaryPrefix + logoPublicId;
+                String electionName = rsElections.get(candidate.getElectionId());
 
     %>
     <tr>
 
         <td> <%=candidate.getCandidateName() %> </td>
-        <td> <%=rsElections.get(candidate.getElectionId()) %> </td>
+        <td> <%=electionName %> </td>
         <td> <%=candidate.getPartyName() %> </td>
         <td> <img class="party-logo" src="<%= imgSource%>" alt="Party Logo"> </td>
 
         <td class="action-icons">
-            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('<%=voteApi%>?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>')">
+            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('<%=voteConfirmApi%>?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>&electionName=<%=electionName%>')">
                 <i class="fa-solid fa-check-to-slot"></i>
             </button>
         </td>
@@ -185,21 +187,22 @@
     <tbody>
     <%
 
-        if (!lsCandidates.isEmpty()){
+        if (!mnCandidates.isEmpty()){
             for(Candidate candidate : mnCandidates){
                 String logoPublicId = allImages.get(candidate.getPartyLogoId());
                 String imgSource = cloudinaryPrefix + logoPublicId;
+                String electionName = mnElections.get(candidate.getElectionId());
 
     %>
     <tr>
 
         <td> <%=candidate.getCandidateName() %> </td>
-        <td> <%=mnElections.get(candidate.getElectionId()) %> </td>
+        <td> <%=electionName %> </td>
         <td> <%=candidate.getPartyName() %> </td>
         <td> <img class="party-logo" src="<%= imgSource%>" alt="Party Logo"> </td>
 
         <td class="action-icons">
-            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('<%=voteApi%>?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>')">
+            <button class="icon-button" title="Vote <%=candidate.getPartyName()%>" onclick="confirmAction('<%=voteConfirmApi%>?voterId=<%=currentUser.getUserId()%>&electionId=<%=candidate.getElectionId()%>&candidateId=<%=candidate.getCandidateId()%>&electionName=<%=electionName%>')">
                 <i class="fa-solid fa-check-to-slot"></i>
             </button>
         </td>

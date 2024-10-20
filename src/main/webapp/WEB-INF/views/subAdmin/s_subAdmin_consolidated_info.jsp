@@ -52,7 +52,7 @@
         <td class="status-inactive">Inactive</td>
         <td class="action-icons">
 
-            <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/subadmin/manageAuthority?subadmin=<%=currentUser.getUserId()%>&candidates=<%=candidate.getCandidateId()%>')">
+            <button class="icon-button icon-authorize" title="Authorize" onclick="confirmAction('/subAdmin/manageAuthority?subAdminId=<%=currentUser.getUserId()%>&candidateId=<%=candidate.getCandidateId()%>')">
                 <i class="fas fa-check-circle"></i>
             </button>
         </td>
@@ -61,7 +61,7 @@
         %>
         <td class="status-active">Active</td>
         <td class="action-icons">
-            <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/subadmin/manageAuthority?subadmin=<%=currentUser.getUserId()%>&candidates=<%=candidate.getCandidateId() %>')">
+            <button class="icon-button icon-revoke" title="Revoke Authority" onclick="confirmAction('/subAdmin/manageAuthority?subAdminId=<%=currentUser.getUserId()%>&candidateId=<%=candidate.getCandidateId() %>')">
                 <i class="fas fa-times-circle"></i>
             </button>
         </td>

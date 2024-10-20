@@ -46,7 +46,7 @@ public class JwtService {
 
         System.out.println("Jwt Key " + env.getProperty("jwt.secret_key"));
 
-        long timeout = 1000  * 60L; // 1 min
+        long timeout = 1000 * 15  * 60L; // 15 mins
         Date issuedAt = new Date();
         Date expirationAt = new Date(issuedAt.getTime() + timeout);
 
