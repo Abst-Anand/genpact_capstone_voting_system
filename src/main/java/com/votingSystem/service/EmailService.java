@@ -24,7 +24,6 @@ public class EmailService {
 
         // Construct the HTML message with the OTP
         String htmlContent = "<h3>Your one-time password (OTP) is: <strong>" + otp + "</strong></h3>" +
-                "<p>Please use this OTP within 5 minutes to reset your password.</p>" +
                 "<br><p>If you didn't request this, please ignore this email.</p>";
 
         // Fetching the sender email address from application.properties using Environment

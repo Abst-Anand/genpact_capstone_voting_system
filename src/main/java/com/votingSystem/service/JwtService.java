@@ -101,6 +101,7 @@ public class JwtService {
         Claims claims = extractAllClaims(token);
 
         Map<String, String> userDetails = new HashMap<>();
+
         userDetails.put("userId", claims.get("userId").toString());
         userDetails.put("name", (String) claims.get("name"));
         userDetails.put("email", claims.getSubject());  // Email is the subject

@@ -19,8 +19,6 @@
 
 <div id="alert"></div>
 
-
-
 <!-- Include header here -->
 <header>
     <a href="/">
@@ -61,7 +59,7 @@
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            <a id="forgot-password" href="/">Forgot Password?</a>
+            <a id="forgot-password" href="/forgot-password">Forgot Password?</a>
 
             <button type="submit">Login</button>
 

@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/globalAlert.css">
+</head>
 
 <%
     String tokenExpired = (String) request.getAttribute("tokenExpired");

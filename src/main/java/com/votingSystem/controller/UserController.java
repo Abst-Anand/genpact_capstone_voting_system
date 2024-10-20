@@ -26,15 +26,13 @@ public class UserController {
     private final ImageService imageService;
     private final CloudinaryService cloudinaryService;
     private final JwtService jwtService;
-    private final EmailService emailService;
 
 
-    public UserController(UserService userService, ImageService imageService, CloudinaryService cloudinaryService, JwtService jwtService, EmailService emailService) {
+    public UserController(UserService userService, ImageService imageService, CloudinaryService cloudinaryService, JwtService jwtService) {
         this.userService = userService;
         this.imageService = imageService;
         this.cloudinaryService = cloudinaryService;
         this.jwtService = jwtService;
-        this.emailService = emailService;
     }
 
 
@@ -58,7 +56,7 @@ public class UserController {
         try {
             imagePublicUrlId = cloudinaryService.uploadImage(profilePic);
         }catch (IOException e){
-            model.addAttribute("errorMessage", "Image upload failed. Try again.");
+            model.addAttribute("error", "Image upload failed. Try again.");
             return "redirect:/user/registration-form";
         }
 
@@ -179,28 +177,6 @@ public class UserController {
 
         return "profile";
     }
-
-    @GetMapping("/forget-password")
-    public String forgetPassword(){
-        return "forget-password";
-    }
-
-    @GetMapping("/send-otp")
-    public String sendEmail(@RequestParam String to){
-
-        String otp = String.valueOf((int) ((Math.random() * 900000) + 100000));
-        System.out.println("OTP: " + otp);
-
-        try {
-            emailService.sendEmail(to, otp);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-
-    }
-
-
 
     private String getRoleName(int roleId){
         if(roleId == 1) return "ELECTION COMMISSIONER";

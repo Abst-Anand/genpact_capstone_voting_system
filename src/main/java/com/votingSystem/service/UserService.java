@@ -39,6 +39,17 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public boolean emailExists(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
+    public boolean updatePassword(String email, String newPassword){
+        User user = findUserByEmail(email).get();
+        user.setPassword(encryptPassword(newPassword));
+        User savedUser = userRepository.save(user);
+        return savedUser != null;
+    }
+
     public boolean signUp(User user) {
 
         Optional<User> existingUser = findUserByEmail(user.getEmail());
