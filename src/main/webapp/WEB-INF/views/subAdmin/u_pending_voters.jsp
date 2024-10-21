@@ -86,7 +86,7 @@
         <h3>Are you sure you want to disapprove this voter?</h3>
         <p>If yes, please provide a reason for rejection:</p>
         <textarea  name= "reason" id="rejectionReason" placeholder="Describe reason"></textarea>
-        <input name = "voterId" type = "hidden" id = "voterId" />  
+        <input name = "voterId" type = "hidden" id = "voterId" required/>
          <input name = "rejectorId" type = "hidden" id = "rejectorId" />  
         <div class="button-container">
         

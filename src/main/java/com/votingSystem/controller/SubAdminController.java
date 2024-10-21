@@ -64,9 +64,11 @@ public class SubAdminController {
     @GetMapping("/voter-info")
     public String showAdminConsolidatedInfo(Model model) {
         System.out.println("subAdmin/info Controller called");
+        User currentUser = jwtService.getCurrentUser();
 
         List<User> allVoters = userService.findPendingVoters();
 
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("allVoters", allVoters);
 
         return "subAdmin/u_pending_voters"; // Maps to /WEB-INF/views/voter/u_voter_consolidated_info.jsp
