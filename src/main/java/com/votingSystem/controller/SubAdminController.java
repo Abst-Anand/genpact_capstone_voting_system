@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/subAdmin")
@@ -157,6 +157,55 @@ public class SubAdminController {
             throw new Exception("Unable to manage authority");
         }
     }
+	
+		@PostMapping("/rejectVoterWithReason")
+	public String rejectVoterWithReason(@RequestParam String voterId, @RequestParam String rejectorId,
+			@RequestParam String reason, Model model) throws IOException, SQLException {
+
+		System.out.println("Reject controller is called");
+		System.out.println(voterId + " " + rejectorId+ " "+ reason);
+		
+		int voterIdInt;
+	    int rejectorIdInt;
+
+	    try {
+	        voterIdInt = Integer.parseInt(voterId);
+	        rejectorIdInt = Integer.parseInt(rejectorId);
+	    } catch (NumberFormatException e) {
+	        // Handle the error appropriately
+	        return "errorPage"; // Return an error page or an error response
+	    }
+	    
+	    System.out.println("Received Voter ID: " + voterIdInt);
+	    System.out.println("Received Rejector ID: " + rejectorIdInt);
+	    System.out.println("Received Reason: " + reason);
+
+		// int voterid;
+		String voterName, voterEmail, voterAdhar;
+
+		Optional<User> voter = userService.findUserById(voterIdInt);
+
+		if (voter.isPresent()) {
+			User user = voter.get(); // Unwrapping the Optional
+			// voterid = user.getUserId();
+			voterName = user.getName(); // Using getter method
+			voterEmail = user.getEmail();
+			voterAdhar = user.getAadharNumber();
+			int result = u_UserImpl.insertRejectedVoters(voterIdInt, voterName, voterEmail, voterAdhar, reason,
+					rejectorIdInt);
+			u_UserImpl.deleteUserById(voterIdInt);
+
+		}
+
+		
+		List<User> allVoters = userService.findPendingVoters();
+
+		model.addAttribute("allVoters", allVoters);
+
+
+		return "subAdmin/u_pending_voters";
+
+	}
 
 
     }

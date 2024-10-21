@@ -26,7 +26,7 @@ class VotingSystemApplicationTests {
 //		ProductEntity savedProduct = productRepository.save(newProduct);
 //		System.out.println(savedProduct);
 //	}
-//
+
 //	@Test
 //	void testFindByTitle(){
 //
@@ -34,7 +34,7 @@ class VotingSystemApplicationTests {
 //		optinalProduct.ifPresent(System.out::println);
 //
 //	}
-//
+
 //	@Test
 //	void testFindAll(){
 //		List<ProductEntity> products = productRepository.findAll();

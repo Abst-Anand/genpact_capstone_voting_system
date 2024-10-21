@@ -53,6 +53,7 @@ public class UserController {
         email = email.toLowerCase();
 
         //Upload image to Cloudinary
+		//imagePublicUrlId ="xgljencrmvtpxnncov1y";
         try {
             imagePublicUrlId = cloudinaryService.uploadImage(profilePic);
         }catch (IOException e){
