@@ -1,44 +1,29 @@
 package com.votingSystem;
 
+import com.votingSystem.entity.User;
+import com.votingSystem.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
+
 @SpringBootTest
 class VotingSystemApplicationTests {
 
-
+	@Autowired
+	UserService userService;
 
 	@Test
-	void contextLoads() {
+	void testFindUserById(){
+		Optional<User> optionalUser = userService.findUserById(4);
+		if(optionalUser.isPresent()){
+			User user = optionalUser.get();
+			System.out.println(user);
+		}else{
+			System.out.println("User Not Found");
+		}
 	}
 
-//	@Test
-//	void testRepository(){
-//		ProductEntity newProduct = ProductEntity
-//				.builder()
-//				.sku("SKU 1")
-//				.price(BigDecimal.valueOf(2000))
-//				.title("Title 1")
-//				.quantity(5)
-//				.build();
-//
-//		ProductEntity savedProduct = productRepository.save(newProduct);
-//		System.out.println(savedProduct);
-//	}
-
-//	@Test
-//	void testFindByTitle(){
-//
-//		Optional<ProductEntity> optinalProduct = productRepository.findByTitle("Title 1");
-//		optinalProduct.ifPresent(System.out::println);
-//
-//	}
-
-//	@Test
-//	void testFindAll(){
-//		List<ProductEntity> products = productRepository.findAll();
-//		System.out.println(products);
-//	}
 
 }

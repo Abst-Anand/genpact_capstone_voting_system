@@ -22,27 +22,27 @@
 
 	 <!-- Name -->
 	    <label for="name">Full Name:</label>
-	    <input type="text" id="name" name="name" placeholder="Enter your full name" >
+	    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
 
 	    <!-- Email -->
 	    <label for="email">Email:</label>
-	    <input type="email" id="email" name="email" placeholder="Enter your email" >
+	    <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
 		<!-- 12-Digit Aadhaar Number (Separated by Dashes) -->
 		    <label for="aadharNumber">Aadhar Number:</label>
-		    <input type="text" id="aadharNumber" name="aadharNumber" placeholder="e.g. 1234-5678-9012" maxlength="14" onkeydown="addSpaces('aadharNumber')">
+		    <input type="text" id="aadharNumber" name="aadharNumber" placeholder="e.g. 1234-5678-9012" maxlength="14" onkeydown="addSpaces('aadharNumber')" required>
 		
 	    <!-- Profile Picture -->
 	    <label for="profilePic">Profile Picture:</label>
-	    <input type="file" id="profilePic" name="profilePic" accept="image/*" >
+	    <input type="file" id="profilePic" name="profilePic" accept="image/*" required>
 
 	    <!-- Password -->
 	    <label for="password">Password:</label>
-	    <input type="password" id="password" name="password" placeholder="Enter your password" >
+	    <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
 	    <!-- Confirm Password -->
 	    <label for="confirmPassword">Confirm Password:</label>
-	    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" >
+	    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
 
 	    <!-- Submit Button -->
 	<!--    <input type="submit" value="Register" id="submitButton">-->

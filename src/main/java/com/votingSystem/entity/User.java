@@ -249,4 +249,21 @@ public class User {
     public void setCreatedBy(int createdBy) {
         this.createdBy = createdBy;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", profilePictureId=" + profilePictureId +
+                ", aadharNumber='" + aadharNumber + '\'' +
+                ", role=" + role +
+                ", password='" + password + '\'' +
+                ", isAuthorityRevoked=" + isAuthorityRevoked +
+                ", createdBy=" + createdBy +
+                ", isApproved=" + isApproved +
+                ", createdOn=" + createdOn +
+                '}';
+    }
 }

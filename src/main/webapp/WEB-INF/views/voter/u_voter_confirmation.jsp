@@ -85,7 +85,7 @@
 
                     <!-- Buttons -->
                     <div class="confirmation-buttons">
-                        <button id="noButton" class="btn" onclick="goBack()">Go Back</button>
+
                         <button type="submit" id="yesButton" class="btn">Vote</button>
                     </div>
                 </form>

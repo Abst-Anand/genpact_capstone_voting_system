@@ -58,6 +58,8 @@ public class CandidateController {
 
 
         String profilePicPublicId, partyLogoPublicId;
+        User currentUser = jwtService.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
 
         try {
             profilePicPublicId = cloudinaryService.uploadImage(profilePic);

@@ -37,7 +37,7 @@
 
     <!-- Name -->
     <label for="name">Election Name:</label>
-    <input type="text" id="name" name="name" placeholder="Enter Election Name" title="Election Name">
+    <input type="text" id="name" name="name" placeholder="Enter Election Name" title="Election Name" required>
 
     <!-- Election Type -->
     <!-- Dropdown Input -->
@@ -51,11 +51,11 @@
 
     <!-- Start Date -->
     <label for="start_date">Start Date and Time:</label>
-    <input type="datetime-local" id="start_date" name="start_date" title="dd-mm-yyyy hh:mm">
+    <input type="datetime-local" id="start_date" name="start_date" title="dd-mm-yyyy hh:mm" required>
 
     <!-- End Date -->
     <label for="end_date">End Date and Time:</label>
-    <input type="datetime-local" id="end_date" name="end_date" title="dd-mm-yyyy hh:mm">
+    <input type="datetime-local" id="end_date" name="end_date" title="dd-mm-yyyy hh:mm" required>
 
 
     <label for="assign_to">Regional Officer:</label>
